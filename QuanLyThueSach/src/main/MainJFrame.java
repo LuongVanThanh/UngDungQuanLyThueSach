@@ -22,42 +22,53 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbtThemThongTin = new javax.swing.JButton();
+        jbtThueSach = new javax.swing.JButton();
+        jbtTraSach = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconNTT.png"))); // NOI18N
-        jButton1.setText("Thêm Thông Tin");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton1.setNextFocusableComponent(this);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtThemThongTin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbtThemThongTin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconNTT.png"))); // NOI18N
+        jbtThemThongTin.setText("Thêm Thông Tin");
+        jbtThemThongTin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jbtThemThongTin.setFocusable(false);
+        jbtThemThongTin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbtThemThongTin.setNextFocusableComponent(this);
+        jbtThemThongTin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtThemThongTinActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconTHS.png"))); // NOI18N
-        jButton2.setText("Thuê Sách");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.setNextFocusableComponent(this);
+        jbtThueSach.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbtThueSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconTHS.png"))); // NOI18N
+        jbtThueSach.setText("Thuê Sách");
+        jbtThueSach.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jbtThueSach.setFocusable(false);
+        jbtThueSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbtThueSach.setNextFocusableComponent(this);
+        jbtThueSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtThueSachActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconTS.png"))); // NOI18N
-        jButton3.setText("Trả Sách");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton3.setNextFocusableComponent(this);
+        jbtTraSach.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbtTraSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconTS.png"))); // NOI18N
+        jbtTraSach.setText("Trả Sách");
+        jbtTraSach.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jbtTraSach.setFocusable(false);
+        jbtTraSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbtTraSach.setNextFocusableComponent(this);
+        jbtTraSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtTraSachActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 255));
 
@@ -90,9 +101,9 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbtThemThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtThueSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtTraSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,21 +111,31 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtThemThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtThueSach, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtThemThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThemThongTinActionPerformed
         this.setVisible(false);
         new ThemThongTinJFrame().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtThemThongTinActionPerformed
+
+    private void jbtThueSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThueSachActionPerformed
+        this.setVisible(false);
+        new ThueSachJFrame().setVisible(true);
+    }//GEN-LAST:event_jbtThueSachActionPerformed
+
+    private void jbtTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtTraSachActionPerformed
+        this.setVisible(false);
+        new TraSachJFrame().setVisible(true);
+    }//GEN-LAST:event_jbtTraSachActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,10 +173,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbtThemThongTin;
+    private javax.swing.JButton jbtThueSach;
+    private javax.swing.JButton jbtTraSach;
     // End of variables declaration//GEN-END:variables
 }
