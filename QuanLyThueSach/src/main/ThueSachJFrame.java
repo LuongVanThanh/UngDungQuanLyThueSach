@@ -1,12 +1,15 @@
 
 package main;
 
+import java.awt.Toolkit;
+
 public class ThueSachJFrame extends javax.swing.JFrame {
 
     public ThueSachJFrame() {
         initComponents();
         setTitle("Thuê Sách");
         setLocation(300, 150);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/IconApp.png")));
     }
 
     /**

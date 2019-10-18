@@ -5,16 +5,28 @@
  */
 package main;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Toolkit;
+import javax.swing.JPanel;
+
 /**
  *
  * @author ASUS
  */
 public class ThemThongTinJFrame extends javax.swing.JFrame {
 
+    private JPanel childPanel;
+    
     public ThemThongTinJFrame() {
         initComponents();
         setTitle("Thêm Thông Tin");
         setLocation(300, 150);
+        jbtVTC.setToolTipText("Quay lai giao diện chính");
+        
+        //thay icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/IconApp.png")));
     }
 
     /**
@@ -26,21 +38,127 @@ public class ThemThongTinJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jpnView = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jbtVTC = new javax.swing.JButton();
+        jbtThemSach = new javax.swing.JButton();
+        jbtThemKH = new javax.swing.JButton();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        javax.swing.GroupLayout jpnViewLayout = new javax.swing.GroupLayout(jpnView);
+        jpnView.setLayout(jpnViewLayout);
+        jpnViewLayout.setHorizontalGroup(
+            jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jpnViewLayout.setVerticalGroup(
+            jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+        );
+
+        jPanel1.setBackground(new java.awt.Color(51, 255, 255));
+
+        jbtVTC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconVTC.png"))); // NOI18N
+        jbtVTC.setToolTipText("Quay lại giao diện chính");
+        jbtVTC.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtVTC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtVTCActionPerformed(evt);
+            }
+        });
+
+        jbtThemSach.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jbtThemSach.setText("Thêm sách");
+        jbtThemSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtThemSachActionPerformed(evt);
+            }
+        });
+
+        jbtThemKH.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jbtThemKH.setText("Thêm khách hàng");
+        jbtThemKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtThemKHActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jbtThemSach, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                .addComponent(jbtVTC, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbtVTC, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbtThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtThemSach, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpnView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    //sự kiện click hình ngôi nhà
+    private void jbtVTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVTCActionPerformed
+        this.setVisible(false);
+        new MainJFrame().setVisible(true);
+    }//GEN-LAST:event_jbtVTCActionPerformed
+
+    //sự kiện click nút thêm sách
+    private void jbtThemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThemSachActionPerformed
+        jbtThemSach.setBackground(new Color(80, 100, 191));
+        jbtThemKH.setBackground(new Color(240, 240, 240));
+        childPanel = new ThemSachJPanel();
+        jpnView.removeAll();
+        jpnView.setLayout(new BorderLayout());
+        jpnView.add(childPanel);
+        jpnView.validate();
+    }//GEN-LAST:event_jbtThemSachActionPerformed
+
+    //sự kiện click nút thêm khách hàng
+    private void jbtThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThemKHActionPerformed
+        jbtThemKH.setBackground(new Color(80, 100, 191));
+        jbtThemSach.setBackground(new Color(240, 240, 240));
+        childPanel = new ThemKHJPanel();
+        jpnView.removeAll();
+        jpnView.setLayout(new BorderLayout());
+        jpnView.add(childPanel);
+        jpnView.validate();
+    }//GEN-LAST:event_jbtThemKHActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +197,11 @@ public class ThemThongTinJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbtThemKH;
+    private javax.swing.JButton jbtThemSach;
+    private javax.swing.JButton jbtVTC;
+    private javax.swing.JPanel jpnView;
     // End of variables declaration//GEN-END:variables
 }

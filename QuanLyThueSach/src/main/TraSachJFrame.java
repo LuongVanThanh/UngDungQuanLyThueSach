@@ -1,12 +1,15 @@
 
 package main;
 
+import java.awt.Toolkit;
+
 public class TraSachJFrame extends javax.swing.JFrame {
 
     public TraSachJFrame() {
         initComponents();
         setTitle("Trả Sách");
         setLocation(300, 150);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/IconApp.png")));
     }
 
     /**

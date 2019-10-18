@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package main;
+
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
@@ -11,6 +16,7 @@ public class MainJFrame extends javax.swing.JFrame {
         
         setTitle("Quản Lý Thuê Sách");
         setLocation(300, 150);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/IconApp.png")));
     }
 
     /**
@@ -179,4 +185,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jbtThueSach;
     private javax.swing.JButton jbtTraSach;
     // End of variables declaration//GEN-END:variables
+
+
+    
 }
