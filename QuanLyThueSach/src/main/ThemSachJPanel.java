@@ -5,6 +5,8 @@
  */
 package main;
 
+import Classes.Sach;
+
 /**
  *
  * @author ASUS
@@ -59,6 +61,16 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         jtfSoLuong.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jButton1.setText("Thêm");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,6 +137,25 @@ public class ThemSachJPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        String tenS = jtfTenSach.getText();
+        String giaS = jtfGiaChoThue.getText();
+        String soluongS = jtfSoLuong.getText();
+        
+        Sach s = new Sach();
+        if(s.ThemSach(tenS, giaS, soluongS) == true)
+        {
+            jtfTenSach.setText("");
+            jtfGiaChoThue.setText("");
+            jtfSoLuong.setText("");
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
