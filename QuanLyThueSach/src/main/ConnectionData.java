@@ -1,0 +1,25 @@
+
+package main;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+/**
+ *
+ * @author Quang Minh
+ */
+public class ConnectionData {
+    
+    private static final String connectionURL ="jdbc:sqlserver://localhost;databaseName=Book;user=sa;password=123";
+    
+    public static Connection ConnectionTest() {
+        Connection conn = null;
+  try {
+    conn = DriverManager.getConnection(connectionURL);
+   } catch (SQLException ex) {
+       return null;
+   }
+    return conn;
+  }
+}
