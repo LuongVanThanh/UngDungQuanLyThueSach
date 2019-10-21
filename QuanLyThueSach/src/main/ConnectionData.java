@@ -11,11 +11,12 @@ import java.sql.SQLException;
  */
 public class ConnectionData {
     
-    private static final String connectionURL ="jdbc:sqlserver://localhost;databaseName=Book;user=sa;password=123";
+    private static final String connectionURL ="jdbc:sqlserver://localhost;databaseName=Book;user=sa;password=";
     
-    public static Connection ConnectionTest() {
+    public static Connection ConnectionTest() throws ClassNotFoundException {
         Connection conn = null;
   try {
+    Class.forName("com.microsoft.sqlsever.jdbc.SQLSeverDriver");
     conn = DriverManager.getConnection(connectionURL);
    } catch (SQLException ex) {
        return null;

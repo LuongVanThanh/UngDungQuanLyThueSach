@@ -115,7 +115,7 @@ public class Sach {
             this.SLS = Integer.parseInt(SLS);
             //Cap nhap csdl
             conn = ConnectionData.ConnectionTest();
-            if(conn != null){
+            if(conn != null && TimSach(MaS) != null){
                 try {
                     st = conn.createStatement();
                     //Update
