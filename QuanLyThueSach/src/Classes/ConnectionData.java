@@ -12,9 +12,10 @@ public class ConnectionData {
 
     private static final String connectionURL = "jdbc:sqlserver://localhost;databaseName=Book;user=sa;password=123";
 
-    public static Connection ConnectionTest() {
+    public static Connection ConnectionTest() throws ClassNotFoundException {
         Connection conn = null;
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(connectionURL);
         } catch (SQLException ex) {
             return null;
