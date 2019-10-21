@@ -5,7 +5,7 @@ CREATE TABLE KhachHang
 (
 	MaKH nvarchar(20),
 	HoTen nvarchar(50),
-	SDT INT,
+	SDT nvarchar(20),
 	PRIMARY KEY (MaKH)	
 )
 /*Tao ban don hang(Ma don hang la so nguyen tu dong tang)*/
@@ -25,7 +25,7 @@ GO
 CREATE TABLE Sach
 (
 	MaS INT IDENTITY(1,1),
-	TenSach nvarchar(50),
+	TenSach nvarchar(20),
 	GiaSach INT,
 	SLS INT,
 	PRIMARY KEY(MaS)

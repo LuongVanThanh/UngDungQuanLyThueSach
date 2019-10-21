@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package Classes;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -115,7 +115,7 @@ public class Sach {
             this.SLS = Integer.parseInt(SLS);
             //Cap nhap csdl
             conn = ConnectionData.ConnectionTest();
-            if(conn != null && TimSach(MaS) != null){
+            if(conn != null){
                 try {
                     st = conn.createStatement();
                     //Update
