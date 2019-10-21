@@ -41,7 +41,7 @@ public class TestSach {
     */
     Sach s = new Sach();
     
-    //Them Sách --> Kiểm tra dữ liệu vào
+//Them Sách --> Kiểm tra dữ liệu vào
 
     @Test
     //test case (50 ki tự, 1000, 1000) --> fail
@@ -87,4 +87,51 @@ public class TestSach {
         Assert.assertEquals(expected, actual);
     }
     
+//Tim sach kiem tra du lieu vao
+    
+    @Test
+    //test case(Chuoi)-->fail
+    public void TestTimSachCase1() throws ClassNotFoundException{
+        Sach actual = s.TimSach("Day la mot chuoi");
+        Sach expected = null;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(-5)-->fail
+    public void TestTimSachCase2() throws ClassNotFoundException{
+        Sach actual = s.TimSach("-5");
+        Sach expected = null;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case('')--> fail
+    public void TestTimSachCase3() throws ClassNotFoundException{
+        Sach actual = s.TimSach("");
+        Sach expected = null;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(0)-->fail
+    public void TestTimSachCase4() throws ClassNotFoundException{
+        Sach actual = s.TimSach("0");
+        Sach expected = null;
+        Assert.assertEquals(expected, actual);
+    }
+    
+    //Test kieu du lieu hop le
+    @Test
+    //Test case(100)-->fail[Do khong tim thay ma sach]
+    public void TestTimSachCase5() throws ClassNotFoundException{
+        Sach actual = s.TimSach("100");
+        Sach expected = null;
+        Assert.assertEquals(expected, actual);
+    }
+    //Test case(1)-->pass
+    public void TestTimSachCase6() throws ClassNotFoundException{
+        boolean actual = false;
+        boolean expected = true;
+        if(s.TimSach("1") != null)
+            actual = true;
+        Assert.assertEquals(expected, actual);
+    }
 }
