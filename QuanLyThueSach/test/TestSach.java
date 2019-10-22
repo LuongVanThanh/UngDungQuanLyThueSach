@@ -134,4 +134,91 @@ public class TestSach {
             actual = true;
         Assert.assertEquals(expected, actual);
     }
+//Test cap nhap sach
+    
+    @Test
+    //Test case(MaS ="chuoi")--> fail
+    public void TestCapNhapSachCase1() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("day la chuoi", "Minh", "1000", "1000");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS < 0)-->fail
+    public void TestCapNhapSachCase2() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("-5", "Minh", "1000", "1000");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 0)-->fail
+    public void TestCapNhapSachCase3() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("0", "Minh", "1000", "1000");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 100)-->fail
+    public void TestCapNhapSachCase4() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("100", "Minh", "1000", "7");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 1, ten > 50)-->fail
+    public void TestCapNhapSachCase5() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("1"
+                , "012345678901234567890123456789012345678901234567890", "1000", "1000");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 1, Ten ="Minh", gia = chuoi)-->fail
+    public void TestCapNhapSachCase6() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("1", "Minh", "day la chuoi", "1000");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 1, ten ="Minh", gia = 0)-->fail
+    public void TestCapNhapSachCase7() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("1", "Minh", "0", "1000");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 1, ten = Minh, gia = -5)-->fail
+    public void TestCapNhapSachCase8() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("1", "Minh", "-5", "1000");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 1, ten = Minh, gia = 5, SLS = chuoi)-->fail
+    public void TestCapNhapSachCase9() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("1", "Minh", "5", "day la chuoi");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 1, ten = Minh, gia = 5, SLS = - 5)-->fail
+    public void TestCapNhapSachCase10() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("1", "Minh", "5", "-5");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 1, ten = Minh, gia = 5, SLS = 0)-->fail
+    public void TestCapNhapSachCase11() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("1", "Minh", "5", "0");
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    //Test case(MaS = 1, ten = Minh, gia = 5, SLS = 1)-->true
+    public void TestCapNhapSachCase12() throws ClassNotFoundException{
+        boolean actual = s.capNhapSach("1", "Minh", "5", "7");
+        boolean expected = true;
+        Assert.assertEquals(expected, actual);
+    }
 }
