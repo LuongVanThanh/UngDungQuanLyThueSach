@@ -17,7 +17,7 @@ import java.sql.Statement;
 public class KhachHang {
     private String MaKH;
     private String HoTen;
-    private int SDT;
+    private long SDT;
     
     private Connection conn = null;
     private ConnectionData cn = null;
@@ -25,10 +25,10 @@ public class KhachHang {
     
     //Kiem tra kieu du lieu nhap vao
     private boolean KTMaKH(String MaKH){
-        if(MaKH.length() == 9 || MaKH.length() == 12){
+        if((MaKH.length() == 9) || (MaKH.length() == 12)){
             try {
-                Integer.parseInt(MaKH);
-                return true;
+                if(Long.parseLong(MaKH) > 0)
+                    return true;
             }
             catch (NumberFormatException ex){
                 return false;
@@ -37,16 +37,16 @@ public class KhachHang {
         return false;
     }
     private boolean KTHoTen (String HoTen){
-        if(HoTen.length() > 50 || HoTen == ""){
+        if(HoTen.length() > 50){
             return false;
         }
         return true;
     }
     private boolean KTsdt(String sdt){
-        if(sdt.length() >9 && sdt.length() < 12){
+        if(sdt.length() == 11 || sdt.length() == 10){
            try{
-               Integer.parseInt(sdt);
-               return true;
+               if(Long.parseLong(sdt) > 0)
+                return true;
            }
            catch(NumberFormatException ex){
                return false;
@@ -61,7 +61,7 @@ public class KhachHang {
             //Gan gia tri;
             this.MaKH = MaKH;
             this.HoTen = HoTen;
-            this.SDT = Integer.parseInt(sdt);
+            this.SDT = Long.parseLong(sdt);
             //Them du lieu vao csdl
             conn = ConnectionData.ConnectionTest();
             if(conn != null){
@@ -69,8 +69,8 @@ public class KhachHang {
                     st = conn.createStatement();
                      //Insert
                      String sqlInsert = "INSERT INTO KhachHang(MaKH, HoTen, SDT)"
-                             + " VALUES(N'" + this.MaKH +"', " + this.HoTen 
-                             +", "+ this.SDT +")";
+                             + " VALUES(N'" + this.MaKH +"', N'" + this.HoTen 
+                             +"', N'"+ this.SDT +"');";
                      st.executeUpdate(sqlInsert);
                      return true;
                 } catch (SQLException e) { 
@@ -85,7 +85,7 @@ public class KhachHang {
     public KhachHang TimKH(String MaKH) throws ClassNotFoundException{
         if(KTMaKH(MaKH)){
             String sqlSelect = "SELECT * FROM KhachHang "
-                    + "Where MaKH = " + Integer.parseInt(MaKH) + " ;";
+                    + "Where MaKH = " + Long.parseLong(MaKH) + " ;";
             conn = ConnectionData.ConnectionTest();
             if(conn != null){
                 try{
@@ -94,7 +94,7 @@ public class KhachHang {
                     ResultSet rs = st.executeQuery(sqlSelect);
                     this.MaKH = rs.getString("MaKH");
                     this.HoTen = rs.getString("HoTen");
-                    this.SDT = rs.getInt("SDT");
+                    this.SDT = rs.getLong("SDT");
                     return this;
                 }
                 catch(Exception ex){

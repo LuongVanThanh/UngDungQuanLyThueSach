@@ -25,7 +25,7 @@ class DH_Sach{
     private int GiaMuon;
             
     
-    private boolean KTSach(String MaS){
+    private boolean KTSach(String MaS) throws ClassNotFoundException{
         if(MaS != ""){
             try {
                 Integer.parseInt(MaS);
@@ -52,7 +52,7 @@ class DH_Sach{
         return false;
     }
     
-    public boolean ThemSach(String MaS, String SLM){
+    public boolean ThemSach(String MaS, String SLM) throws ClassNotFoundException{
         if(KTSach(MaS) && KTSLM(SLM)){
             this.sach = this.sach.TimSach(MaS);
             this.SLM = Integer.parseInt(SLM);
@@ -102,15 +102,6 @@ public class DonHang {
         }
         return false;
     }
-    //Them vao mang
-    public boolean ThemSach(String MaS, String SLM){
-        DH_Sach temp = new  DH_Sach();
-        if(temp.ThemSach(MaS, SLM)){
-            arrDH_Sach.add(temp);
-            return true;
-        }
-        return false;
-    }
     //Thiet lap ngay tra sach
     private void ThietLapNgayTra(){
         LocalDate temp = LocalDate.now();
@@ -124,6 +115,15 @@ public class DonHang {
             temp += arrDH_Sach.get(i).getGiaMuon();
         }
         return temp;
+    }
+    //Them vao mang
+    public boolean ThemSach(String MaS, String SLM) throws ClassNotFoundException{
+        DH_Sach temp = new  DH_Sach();
+        if(temp.ThemSach(MaS, SLM)){
+            arrDH_Sach.add(temp);
+            return true;
+        }
+        return false;
     }
     //Kiem tra TinhTrang
     public boolean KTTinhTrang() throws ClassNotFoundException{
