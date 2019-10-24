@@ -128,6 +128,7 @@
               <Image iconType="3" name="/image/IconVTC.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Quay l&#x1ea1;i giao di&#x1ec7;n ch&#xed;nh"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
@@ -140,6 +141,7 @@
               <Font name="Arial" size="20" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m s&#xe1;ch"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtThemSachActionPerformed"/>
@@ -151,6 +153,7 @@
               <Font name="Arial" size="20" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m kh&#xe1;ch h&#xe0;ng"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtThemKHActionPerformed"/>
@@ -162,6 +165,7 @@
               <Font name="Arial" size="20" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t s&#xe1;ch"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtCNSachActionPerformed"/>

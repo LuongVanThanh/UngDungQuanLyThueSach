@@ -7,13 +7,17 @@ package main;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
-        
+
         setTitle("Quản Lý Thuê Sách");
         setLocation(300, 150);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/IconApp.png")));
@@ -173,6 +177,17 @@ public class MainJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);  
+                }
                 new MainJFrame().setVisible(true);
             }
         });
@@ -186,6 +201,4 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jbtTraSach;
     // End of variables declaration//GEN-END:variables
 
-
-    
 }

@@ -56,7 +56,7 @@ public class KhachHang {
     }
     
     //them thong tin khach hang
-    public boolean ThemKH(String MaKH, String HoTen, String sdt){
+    public boolean ThemKH(String MaKH, String HoTen, String sdt) throws ClassNotFoundException{
         if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
             //Gan gia tri;
             this.MaKH = MaKH;
@@ -81,7 +81,7 @@ public class KhachHang {
     }
     
     //lay thông tin khách hàng
-    public KhachHang TimKH(String MaKH){
+    public KhachHang TimKH(String MaKH) throws ClassNotFoundException{
         if(KTMaKH(MaKH)){
             String sqlSelect = "SELECT * FROM KhachHang "
                     + "Where MaKH = " + Integer.parseInt(MaKH) + " ;";

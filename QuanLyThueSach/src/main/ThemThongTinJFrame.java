@@ -9,7 +9,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -66,6 +70,7 @@ public class ThemThongTinJFrame extends javax.swing.JFrame {
 
         jbtVTC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconVTC.png"))); // NOI18N
         jbtVTC.setToolTipText("Quay lại giao diện chính");
+        jbtVTC.setFocusable(false);
         jbtVTC.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtVTC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +80,7 @@ public class ThemThongTinJFrame extends javax.swing.JFrame {
 
         jbtThemSach.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jbtThemSach.setText("Thêm sách");
+        jbtThemSach.setFocusable(false);
         jbtThemSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtThemSachActionPerformed(evt);
@@ -83,6 +89,7 @@ public class ThemThongTinJFrame extends javax.swing.JFrame {
 
         jbtThemKH.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jbtThemKH.setText("Thêm khách hàng");
+        jbtThemKH.setFocusable(false);
         jbtThemKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtThemKHActionPerformed(evt);
@@ -91,6 +98,7 @@ public class ThemThongTinJFrame extends javax.swing.JFrame {
 
         jbtCNSach.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jbtCNSach.setText("Cập nhật sách");
+        jbtCNSach.setFocusable(false);
         jbtCNSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtCNSachActionPerformed(evt);
@@ -221,6 +229,17 @@ public class ThemThongTinJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ThemThongTinJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(ThemThongTinJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(ThemThongTinJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(ThemThongTinJFrame.class.getName()).log(Level.SEVERE, null, ex);  
+                }
                 new ThemThongTinJFrame().setVisible(true);
             }
         });

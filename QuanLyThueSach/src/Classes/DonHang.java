@@ -25,7 +25,7 @@ class DH_Sach{
     private int GiaMuon;
             
     
-    private boolean KTSach(String MaS){
+    private boolean KTSach(String MaS) throws ClassNotFoundException{
         if(MaS != ""){
             try {
                 Integer.parseInt(MaS);
@@ -52,7 +52,7 @@ class DH_Sach{
         return false;
     }
     
-    public boolean ThemSach(String MaS, String SLM){
+    public boolean ThemSach(String MaS, String SLM) throws ClassNotFoundException{
         if(KTSach(MaS) && KTSLM(SLM)){
             this.sach = this.sach.TimSach(MaS);
             this.SLM = Integer.parseInt(SLM);
@@ -87,7 +87,7 @@ public class DonHang {
     private ArrayList<DH_Sach> arrDH_Sach = new ArrayList<>();
     
     //Kiem tra kieu du lieu
-    private boolean KTMaKH(String MaKH){
+    private boolean KTMaKH(String MaKH) throws ClassNotFoundException{
         if(MaKH.length() == 9 || MaKH.length() == 12){
             try {
                 Integer.parseInt(MaKH);
@@ -103,7 +103,7 @@ public class DonHang {
         return false;
     }
     //Them vao mang
-    public boolean ThemSach(String MaS, String SLM){
+    public boolean ThemSach(String MaS, String SLM) throws ClassNotFoundException{
         DH_Sach temp = new  DH_Sach();
         if(temp.ThemSach(MaS, SLM)){
             arrDH_Sach.add(temp);
@@ -126,7 +126,7 @@ public class DonHang {
         return temp;
     }
     //Kiem tra TinhTrang
-    public boolean KTTinhTrang(){
+    public boolean KTTinhTrang() throws ClassNotFoundException{
         this.conn = ConnectionData.ConnectionTest();
             if(conn != null){
                 try{
@@ -149,7 +149,7 @@ public class DonHang {
     //Them thong tin do hang
         //b1: Them thong tin DonHang
         //b2: Them thong tin vao DH_Sach
-    public boolean ThemDonHang(String MaKH) throws SQLException{
+    public boolean ThemDonHang(String MaKH) throws SQLException, ClassNotFoundException{
         if(KTMaKH(MaKH) && KTTinhTrang() && arrDH_Sach != null){
             //gan gia tri
             this.MaKH = MaKH;
@@ -187,7 +187,7 @@ public class DonHang {
         return false;
     }
     //Tra sach
-    public boolean TraSach(String MaKH){
+    public boolean TraSach(String MaKH) throws ClassNotFoundException{
         if(KTMaKH(MaKH) && KTTinhTrang() != true){
             this.conn = ConnectionData.ConnectionTest();
             if(conn != null){

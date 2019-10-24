@@ -6,6 +6,8 @@
 package main;
 
 import Classes.Sach;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -53,6 +55,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         jLabel5.setText("Số lượng sách:");
 
         jtfMaSach.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jtfMaSach.setEnabled(false);
 
         jtfTenSach.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -144,16 +147,20 @@ public class ThemSachJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        String tenS = jtfTenSach.getText();
-        String giaS = jtfGiaChoThue.getText();
-        String soluongS = jtfSoLuong.getText();
-        
-        Sach s = new Sach();
-        if(s.ThemSach(tenS, giaS, soluongS) == true)
-        {
-            jtfTenSach.setText("");
-            jtfGiaChoThue.setText("");
-            jtfSoLuong.setText("");
+        try {
+            String tenS = jtfTenSach.getText();
+            String giaS = jtfGiaChoThue.getText();
+            String soluongS = jtfSoLuong.getText();
+            
+            Sach s = new Sach();
+            if(s.ThemSach(tenS, giaS, soluongS) == true)
+            {
+                jtfTenSach.setText("");
+                jtfGiaChoThue.setText("");
+                jtfSoLuong.setText("");
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ThemSachJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1MouseClicked
 

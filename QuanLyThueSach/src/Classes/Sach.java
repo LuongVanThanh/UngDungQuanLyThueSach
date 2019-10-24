@@ -81,7 +81,7 @@ public class Sach {
     }
     
     //Them sach
-    public boolean ThemSach(String Ten, String Gia, String SLS){
+    public boolean ThemSach(String Ten, String Gia, String SLS) throws ClassNotFoundException{
         if(KTTen(Ten)&&KTGia(Gia)&&KTSLS(SLS)){
             //Gan gia tri
             this.Ten = Ten;
@@ -106,7 +106,7 @@ public class Sach {
     }
 
     //Cập nhập thông tin cho sách
-    public boolean capNhapSach(String MaS, String Ten, String Gia, String SLS){
+    public boolean capNhapSach(String MaS, String Ten, String Gia, String SLS) throws ClassNotFoundException{
         if(KTMaS(MaS) && KTTen(Ten) && KTGia(Gia) && KTSLS(SLS)){
             //Gan gia tri
             this.MaS = Integer.parseInt(MaS);
@@ -133,7 +133,7 @@ public class Sach {
     }
 
     //Tim kiem sach
-    public Sach TimSach(String MaS){
+    public Sach TimSach(String MaS) throws ClassNotFoundException{
         if(KTMaS(MaS)){
             String sqlSelect = "SELECT * FROM Sach"
                     + " WHERE MaS = " + Integer.parseInt(MaS) +" ;";
