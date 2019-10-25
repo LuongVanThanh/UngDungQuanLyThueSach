@@ -13,7 +13,7 @@ import org.junit.Test;
  *
  * @author Quang Minh
  */
-public class TestKhachHang {
+public class TestThemKH {
     /*
         1.Test them khach hang
             1.1Test du lieu dau vao

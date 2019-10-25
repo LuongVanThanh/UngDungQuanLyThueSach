@@ -138,12 +138,11 @@ public class Sach {
             String sqlSelect = "SELECT * FROM Sach"
                     + " WHERE MaS = " + Integer.parseInt(MaS) +" ;";
             conn = ConnectionData.ConnectionTest();
-
             try{
                 if(conn != null){
-                    st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                            ResultSet.CONCUR_READ_ONLY);
+                    st = conn.createStatement();
                     ResultSet rs = st.executeQuery(sqlSelect);
+                    rs.next();
                     this.MaS = rs.getInt("MaS");
                     this.Ten = rs.getString("TenSach");
                     this.Gia = rs.getInt("GiaSach");

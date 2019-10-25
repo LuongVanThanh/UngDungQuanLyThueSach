@@ -17,7 +17,7 @@ import java.sql.Statement;
 public class KhachHang {
     private String MaKH;
     private String HoTen;
-    private long SDT;
+    private String SDT;
     
     private Connection conn = null;
     private ConnectionData cn = null;
@@ -55,13 +55,24 @@ public class KhachHang {
         return false;
     }
     
+    //Lay thong tin
+    public String getMaKH(){
+        return this.MaKH;
+    }
+    public String getHoTen(){
+        return this.HoTen;
+    }
+    public String getSDT(){
+        return this.SDT;
+    }
+    
     //them thong tin khach hang
     public boolean ThemKH(String MaKH, String HoTen, String sdt) throws ClassNotFoundException{
         if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
             //Gan gia tri;
             this.MaKH = MaKH;
             this.HoTen = HoTen;
-            this.SDT = Long.parseLong(sdt);
+            this.SDT = sdt;
             //Them du lieu vao csdl
             conn = ConnectionData.ConnectionTest();
             if(conn != null){
@@ -70,7 +81,7 @@ public class KhachHang {
                      //Insert
                      String sqlInsert = "INSERT INTO KhachHang(MaKH, HoTen, SDT)"
                              + " VALUES(N'" + this.MaKH +"', N'" + this.HoTen 
-                             +"', N'"+ this.SDT +"');";
+                             +"', N'"+ SDT +"');";
                      st.executeUpdate(sqlInsert);
                      return true;
                 } catch (SQLException e) { 
@@ -84,22 +95,24 @@ public class KhachHang {
     //lay thông tin khách hàng
     public KhachHang TimKH(String MaKH) throws ClassNotFoundException{
         if(KTMaKH(MaKH)){
-            String sqlSelect = "SELECT * FROM KhachHang "
-                    + "Where MaKH = " + Long.parseLong(MaKH) + " ;";
+            String sqlSelect = "SELECT * FROM KhachHang Where MaKH = N'"+
+                    MaKH+"';";
             conn = ConnectionData.ConnectionTest();
-            if(conn != null){
-                try{
-                    st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                            ResultSet.CONCUR_READ_ONLY);
+            
+            try{
+                if(conn != null){
+                    st = conn.createStatement();
                     ResultSet rs = st.executeQuery(sqlSelect);
-                    this.MaKH = rs.getString("MaKH");
-                    this.HoTen = rs.getString("HoTen");
-                    this.SDT = rs.getLong("SDT");
+                    rs.next();
+                    this.MaKH = rs.getString(1);
+                    this.HoTen = rs.getString(2);
+                    this.SDT = rs.getString(3);
+                    
                     return this;
                 }
-                catch(Exception ex){
-                    return null;
-                }
+            }
+            catch (SQLException ex){
+                return null;
             }
         }
         return null;
