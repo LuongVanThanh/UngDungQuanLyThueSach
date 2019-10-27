@@ -45,10 +45,7 @@
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="jpnView" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jpnView" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -69,7 +66,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="637" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -92,10 +89,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jbtThemSach" min="-2" pref="184" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jbtCNSach" min="-2" pref="184" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jbtThemKH" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="85" max="32767" attributes="0"/>
+                  <EmptySpace pref="516" max="32767" attributes="0"/>
                   <Component id="jbtVTC" min="-2" pref="67" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -106,17 +101,12 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jbtVTC" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="jbtThemSach" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jbtThemSach" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="jbtThemKH" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jbtThemKH" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="jbtCNSach" min="-2" pref="47" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -138,7 +128,7 @@
         <Component class="javax.swing.JButton" name="jbtThemSach">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="20" style="0"/>
+              <Font name="Arial" size="24" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m s&#xe1;ch"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -150,25 +140,13 @@
         <Component class="javax.swing.JButton" name="jbtThemKH">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="20" style="0"/>
+              <Font name="Arial" size="24" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m kh&#xe1;ch h&#xe0;ng"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtThemKHActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jbtCNSach">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="20" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t s&#xe1;ch"/>
-            <Property name="focusable" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtCNSachActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
