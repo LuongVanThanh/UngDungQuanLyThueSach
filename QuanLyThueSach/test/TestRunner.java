@@ -17,7 +17,7 @@ import org.junit.runner.Result;
  */
 public class TestRunner {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(TestTimKH.class);
+        Result result = JUnitCore.runClasses(TestDonHang.TestThemDonHang.class);
 
         if (!result.wasSuccessful()) {
             result.getFailures().forEach((failure) -> {

@@ -1,3 +1,5 @@
+package TestKhachHang;
+
 
 import Classes.KhachHang;
 import org.junit.Assert;

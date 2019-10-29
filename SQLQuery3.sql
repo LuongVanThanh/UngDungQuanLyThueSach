@@ -25,7 +25,7 @@ GO
 CREATE TABLE Sach
 (
 	MaS INT IDENTITY(1,1),
-	TenSach nvarchar(20),
+	TenSach nvarchar(100),
 	GiaSach INT,
 	SLS INT,
 	PRIMARY KEY(MaS)

@@ -106,22 +106,24 @@ public class Sach {
     }
 
     //Cập nhập thông tin cho sách
-    public boolean capNhapSach(String MaS, String Ten, String Gia, String SLS) throws ClassNotFoundException{
+    public boolean capNhapSach(String MaS, String Ten, String Gia, String SLS) 
+            throws ClassNotFoundException{
         if(KTMaS(MaS) && KTTen(Ten) && KTGia(Gia) && KTSLS(SLS)){
-            //Gan gia tri
-            this.MaS = Integer.parseInt(MaS);
-            this.Ten = Ten;
-            this.Gia = Integer.parseInt(Gia);
-            this.SLS = Integer.parseInt(SLS);
             //Cap nhap csdl
             conn = ConnectionData.ConnectionTest();
-            if(conn != null){
+            if(conn != null&& TimSach(MaS)!= null){
                 try {
+                    //Gan gia tri
+                    this.MaS = Integer.parseInt(MaS);
+                    this.Ten = Ten;
+                    this.Gia = Integer.parseInt(Gia);
+                    this.SLS = Integer.parseInt(SLS);
                     st = conn.createStatement();
                     //Update
                     String sqlUpdate = "UPDATE Sach set TenSach = '"+this.Ten+
                             "', GiaSach = "+this.Gia+", SLS = "+this.SLS+
                             " WHERE MaS = "+this.MaS+";";
+                    System.out.println(sqlUpdate);
                     st.executeUpdate(sqlUpdate);
                     return true;
                 } catch (SQLException e) {
@@ -132,6 +134,30 @@ public class Sach {
         return false;
     }
 
+    public boolean capNhapSach(String MaS, String SLS) throws ClassNotFoundException{
+        if(KTMaS(MaS) && KTSLS(SLS)){
+            //Gan gia tri
+            this.MaS = Integer.parseInt(MaS);
+            this.SLS = Integer.parseInt(SLS);
+            //Cap nhap csdl
+            conn = ConnectionData.ConnectionTest();
+            if(conn != null&& TimSach(MaS)!= null){
+                try {
+                    //Gan gia tri
+                    this.SLS = Integer.parseInt(SLS);
+                    st = conn.createStatement();
+                    //Update
+                    String sqlUpdate = "UPDATE Sach set SLS = "+this.SLS+
+                            " WHERE MaS = "+this.MaS+";";
+                    st.executeUpdate(sqlUpdate);
+                    return true;
+                } catch (SQLException e) {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
     //Tim kiem sach
     public Sach TimSach(String MaS) throws ClassNotFoundException{
         if(KTMaS(MaS)){
@@ -156,5 +182,9 @@ public class Sach {
             }
         }
         return null;
+    }
+    public static void main(String[] args) throws ClassNotFoundException {
+        Sach s = new Sach();
+        s.capNhapSach("2","100");
     }
 }
