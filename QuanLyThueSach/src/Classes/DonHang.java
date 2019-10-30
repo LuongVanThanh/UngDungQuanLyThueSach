@@ -154,22 +154,22 @@ public class DonHang {
                             ResultSet.CONCUR_READ_ONLY);
                     stI = conn.createStatement();
                     //Lay MaDH
-                    String sqlGetMaDH = "SELECT MaDH FROM DonHang";
+                    String sqlGetMaDH = "SELECT MaDH From DonHang Where MaDH = "
+                            + "(SELECT max(MaDH) FROM DonHang WHERE MaKH = N'"+
+                            MaKH+"');";
                     ResultSet rs = stR.executeQuery(sqlGetMaDH);
-                    rs.last();
+                    rs.next();
                     this.MaDH = rs.getInt("MaDH");
-                    String sqlUpdate = "UPDATE DonHang SET TinhTrang= 'True', "
-                            + "WHERE MaDH ='"+this.MaKH+"'";
+                    String sqlUpdate = "UPDATE DonHang SET TinhTrang = 1 "
+                            + "WHERE MaDH = "+this.MaDH+";";
+                    System.out.println(sqlUpdate);
                     stI.executeUpdate(sqlUpdate);
+                    return true;
                 }catch(SQLException ex){
                     return false;
                 }
             }
         }
         return false;
-    }
-    public static void main(String[] args) throws ClassNotFoundException {
-        DonHang dh = new DonHang();
-        System.out.println(dh.KTTinhTrang("123456789"));
     }
 }
