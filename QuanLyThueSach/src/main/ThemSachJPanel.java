@@ -8,6 +8,7 @@ package main;
 import Classes.Sach;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -201,17 +202,34 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         try {
             String tenS = jtfTenSach.getText();
             String giaS = jtfGiaChoThue.getText();
-            String soluongS = jtfSoLuong.getText();
-            
-            Sach s = new Sach();
-            if(s.ThemSach(tenS, giaS, soluongS) == true)
-            {
-                jtfTenSach.setText("");
-                jtfGiaChoThue.setText("");
-                jtfSoLuong.setText("");
+            String soLuongS = jtfSoLuong.getText();
+            if("".equals(tenS)){
+                JOptionPane.showMessageDialog(null, "Bạn chưa nhập tên sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfTenSach.requestFocus();
+            }
+            else if("".equals(giaS)){
+                JOptionPane.showMessageDialog(null, "Bạn chưa nhập giá sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfGiaChoThue.requestFocus();
+            }
+            else if("".equals(soLuongS)){
+                JOptionPane.showMessageDialog(null, "Bạn chưa nhập số lượng sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfSoLuong.requestFocus();
+            }
+            else {
+                Sach s = new Sach();
+                if(s.ThemSach(tenS, giaS, soLuongS) == true)
+                {
+                    jtfTenSach.setText("");
+                    jtfGiaChoThue.setText("");
+                    jtfSoLuong.setText("");
+                }
+                else
+                    throw new Exception("Dữ liệu không hợp lệ!");
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ThemSachJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
