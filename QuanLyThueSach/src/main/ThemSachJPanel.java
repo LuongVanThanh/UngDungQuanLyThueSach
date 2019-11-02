@@ -55,6 +55,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         jbtCapNhatS = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbSach = new javax.swing.JTable();
+        jbtReset = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setText("Mã sách: ");
@@ -92,6 +93,11 @@ public class ThemSachJPanel extends javax.swing.JPanel {
 
         jbtCapNhatS.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtCapNhatS.setText("Cập nhật");
+        jbtCapNhatS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtCapNhatSMouseClicked(evt);
+            }
+        });
 
         jtbSach = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -136,36 +142,54 @@ public class ThemSachJPanel extends javax.swing.JPanel {
             jtbSach.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        jbtReset.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbtReset.setText("Reset");
+        jbtReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtResetMouseClicked(evt);
+            }
+        });
+        jbtReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(22, 22, 22)
-                            .addComponent(jtfGiaChoThue, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1))
-                            .addGap(49, 49, 49)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtfMaSach)
-                                .addComponent(jtfTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(22, 22, 22)
+                                    .addComponent(jtfGiaChoThue, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel1))
+                                    .addGap(49, 49, 49)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jtfMaSach)
+                                        .addComponent(jtfTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbtCapNhatS, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtReset, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(jbtCapNhatS, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,8 +213,9 @@ public class ThemSachJPanel extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtThem)
+                    .addComponent(jbtReset)
                     .addComponent(jbtCapNhatS))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -212,6 +237,15 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         int i = model.getRowCount() - 1;
         int maS = Integer.parseInt(model.getValueAt(i, 0).toString());
         jtfMaSach.setText(String.valueOf(maS+1));
+    }
+    //trở về mặc định lúc thêm
+    private void init(){
+        jtfTenSach.setText("");
+        jtfGiaChoThue.setText("");
+        jtfSoLuong.setText("");
+        loadMaS();
+        jtfTenSach.requestFocus();
+        showData();
     }
     //show dữ vào bảng sách
     private void showData(){
@@ -240,40 +274,35 @@ public class ThemSachJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jbtThemActionPerformed
 
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
-        try {
-            String tenS = jtfTenSach.getText();
-            String giaS = jtfGiaChoThue.getText();
-            String soLuongS = jtfSoLuong.getText();
-            if("".equals(tenS)){
-                JOptionPane.showMessageDialog(null, "Bạn chưa nhập tên sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
-                jtfTenSach.requestFocus();
-            }
-            else if("".equals(giaS)){
-                JOptionPane.showMessageDialog(null, "Bạn chưa nhập giá sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
-                jtfGiaChoThue.requestFocus();
-            }
-            else if("".equals(soLuongS)){
-                JOptionPane.showMessageDialog(null, "Bạn chưa nhập số lượng sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
-                jtfSoLuong.requestFocus();
-            }
-            else {
-                Sach s = new Sach();
-                if(s.ThemSach(tenS, giaS, soLuongS) == true)
-                {
-                    jtfTenSach.setText("");
-                    jtfGiaChoThue.setText("");
-                    jtfSoLuong.setText("");
-                    showData();
-                    loadMaS();
+        if(jtbSach.getSelectedRow() == -1){
+            try {
+                String tenS = jtfTenSach.getText();
+                String giaS = jtfGiaChoThue.getText();
+                String soLuongS = jtfSoLuong.getText();
+                if ("".equals(tenS)) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa nhập tên sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfTenSach.requestFocus();
+                } else if ("".equals(giaS)) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa nhập giá sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfGiaChoThue.requestFocus();
+                } else if ("".equals(soLuongS)) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa nhập số lượng sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfSoLuong.requestFocus();
+                } else {
+                    Sach s = new Sach();
+                    if (s.ThemSach(tenS, giaS, soLuongS) == true) {
+                        init();
+                    } else {
+                        throw new Exception("Dữ liệu không hợp lệ!");
+                    }
                 }
-                else
-                    throw new Exception("Dữ liệu không hợp lệ!");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ThemSachJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ThemSachJPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_jbtThemMouseClicked
     
     //xử lý chọn bên table đưa data lên text field
@@ -286,6 +315,44 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         jtfSoLuong.setText(model.getValueAt(i, 3).toString());
     }//GEN-LAST:event_jtbSachMouseClicked
 
+    private void jbtResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtResetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtResetActionPerformed
+
+    private void jbtResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtResetMouseClicked
+        init();
+    }//GEN-LAST:event_jbtResetMouseClicked
+
+    private void jbtCapNhatSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtCapNhatSMouseClicked
+        try {
+            String maS = jtfMaSach.getText();
+            String tenS = jtfTenSach.getText();
+            String giaS = jtfGiaChoThue.getText();
+            String soLuongS = jtfSoLuong.getText();
+            if ("".equals(tenS)) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa nhập tên sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfTenSach.requestFocus();
+            } else if ("".equals(giaS)) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa nhập giá sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfGiaChoThue.requestFocus();
+            } else if ("".equals(soLuongS)) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa nhập số lượng sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfSoLuong.requestFocus();
+            } else {
+                Sach s = new Sach();
+                if (s.capNhapSach(maS, tenS, giaS, soLuongS) == true) {
+                    init();
+                } else {
+                    throw new Exception("Dữ liệu không hợp lệ!");
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ThemSachJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbtCapNhatSMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -295,6 +362,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtCapNhatS;
+    private javax.swing.JButton jbtReset;
     private javax.swing.JButton jbtThem;
     private javax.swing.JTable jtbSach;
     private javax.swing.JTextField jtfGiaChoThue;
