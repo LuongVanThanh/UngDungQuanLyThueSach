@@ -5,10 +5,18 @@
  */
 package main;
 
+import Classes.ConnectionData;
 import Classes.Sach;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -21,6 +29,8 @@ public class ThemSachJPanel extends javax.swing.JPanel {
      */
     public ThemSachJPanel() {
         initComponents();
+        showData();
+        loadMaS();
     }
 
     /**
@@ -41,7 +51,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         jtfTenSach = new javax.swing.JTextField();
         jtfGiaChoThue = new javax.swing.JTextField();
         jtfSoLuong = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbtThem = new javax.swing.JButton();
         jbtCapNhatS = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbSach = new javax.swing.JTable();
@@ -67,36 +77,38 @@ public class ThemSachJPanel extends javax.swing.JPanel {
 
         jtfSoLuong.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton1.setText("Thêm");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbtThem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbtThem.setText("Thêm");
+        jbtThem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jbtThemMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtThemActionPerformed(evt);
             }
         });
 
         jbtCapNhatS.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtCapNhatS.setText("Cập nhật");
 
+        jtbSach = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jtbSach.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jtbSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Mã sách", "Tên sách", "Giá sách", "Số lượng"
+                "Mã sách", "Tên sách", "Giá cho thuê", "Số lượng"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -111,16 +123,17 @@ public class ThemSachJPanel extends javax.swing.JPanel {
             }
         });
         jtbSach.getTableHeader().setReorderingAllowed(false);
+        jtbSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbSachMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbSach);
         if (jtbSach.getColumnModel().getColumnCount() > 0) {
             jtbSach.getColumnModel().getColumn(0).setResizable(false);
-            jtbSach.getColumnModel().getColumn(0).setPreferredWidth(10);
             jtbSach.getColumnModel().getColumn(1).setResizable(false);
-            jtbSach.getColumnModel().getColumn(1).setPreferredWidth(150);
             jtbSach.getColumnModel().getColumn(2).setResizable(false);
-            jtbSach.getColumnModel().getColumn(2).setPreferredWidth(50);
             jtbSach.getColumnModel().getColumn(3).setResizable(false);
-            jtbSach.getColumnModel().getColumn(3).setPreferredWidth(20);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -150,7 +163,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbtCapNhatS, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
         );
@@ -175,7 +188,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
                     .addComponent(jtfSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jbtThem)
                     .addComponent(jbtCapNhatS))
                 .addContainerGap(72, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -192,13 +205,41 @@ public class ThemSachJPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    //lấy mã sách tự động
+    private void loadMaS(){
+        TableModel model = jtbSach.getModel();
+        int i = model.getRowCount() - 1;
+        int maS = Integer.parseInt(model.getValueAt(i, 0).toString());
+        jtfMaSach.setText(String.valueOf(maS+1));
+    }
+    //show dữ vào bảng sách
+    private void showData(){
+        try{
+            jtbSach.removeAll();
+            String[] arr = {"Mã sách", "Tên sách", "Giá cho thuê", "Số lượng"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            Connection conn = ConnectionData.ConnectionTest();
+            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[Sach]");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Vector v = new Vector();
+                v.add(rs.getInt("MaS"));
+                v.add(rs.getString("TenSach"));
+                v.add(rs.getInt("GiaSach"));
+                v.add(rs.getInt("SLS"));
+                model.addRow(v);
+            }
+            jtbSach.setModel(model);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void jbtThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtThemActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
         try {
             String tenS = jtfTenSach.getText();
             String giaS = jtfGiaChoThue.getText();
@@ -222,6 +263,8 @@ public class ThemSachJPanel extends javax.swing.JPanel {
                     jtfTenSach.setText("");
                     jtfGiaChoThue.setText("");
                     jtfSoLuong.setText("");
+                    showData();
+                    loadMaS();
                 }
                 else
                     throw new Exception("Dữ liệu không hợp lệ!");
@@ -231,11 +274,20 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_jbtThemMouseClicked
+    
+    //xử lý chọn bên table đưa data lên text field
+    private void jtbSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbSachMouseClicked
+        int i = jtbSach.getSelectedRow();
+        TableModel model = jtbSach.getModel();
+        jtfMaSach.setText(model.getValueAt(i, 0).toString());
+        jtfTenSach.setText(model.getValueAt(i, 1).toString());
+        jtfGiaChoThue.setText(model.getValueAt(i, 2).toString());
+        jtfSoLuong.setText(model.getValueAt(i, 3).toString());
+    }//GEN-LAST:event_jtbSachMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -243,6 +295,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtCapNhatS;
+    private javax.swing.JButton jbtThem;
     private javax.swing.JTable jtbSach;
     private javax.swing.JTextField jtfGiaChoThue;
     private javax.swing.JTextField jtfMaSach;

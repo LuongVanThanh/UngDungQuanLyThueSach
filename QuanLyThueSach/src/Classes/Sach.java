@@ -35,8 +35,8 @@ public class Sach {
     private boolean KTGia(String g){
         if(g != ""){
             try {
-                Integer.parseInt(g);
-                return true;
+                if(Integer.parseInt(g) > 0)
+                    return true;
             } catch (NumberFormatException e) {
                  return false;
             }
@@ -46,8 +46,8 @@ public class Sach {
     private boolean KTSLS(String g){
         if(g != ""){
             try {
-                Integer.parseInt(g);
-                return true;
+                if(Integer.parseInt(g) > 0)
+                    return true;
             } catch (NumberFormatException e) {
                  return false;
             }
@@ -57,8 +57,8 @@ public class Sach {
     private boolean KTMaS(String MaS){
         if(MaS != ""){
             try {
-                Integer.parseInt(MaS);
-                return true;
+                if(Integer.parseInt(MaS) > 0)
+                    return true;
             } catch (NumberFormatException e) {
                  return false;
             }
@@ -106,22 +106,24 @@ public class Sach {
     }
 
     //Cập nhập thông tin cho sách
-    public boolean capNhapSach(String MaS, String Ten, String Gia, String SLS) throws ClassNotFoundException{
+    public boolean capNhapSach(String MaS, String Ten, String Gia, String SLS) 
+            throws ClassNotFoundException{
         if(KTMaS(MaS) && KTTen(Ten) && KTGia(Gia) && KTSLS(SLS)){
-            //Gan gia tri
-            this.MaS = Integer.parseInt(MaS);
-            this.Ten = Ten;
-            this.Gia = Integer.parseInt(Gia);
-            this.SLS = Integer.parseInt(SLS);
             //Cap nhap csdl
             conn = ConnectionData.ConnectionTest();
-            if(conn != null){
+            if(conn != null&& TimSach(MaS)!= null){
                 try {
+                    //Gan gia tri
+                    this.MaS = Integer.parseInt(MaS);
+                    this.Ten = Ten;
+                    this.Gia = Integer.parseInt(Gia);
+                    this.SLS = Integer.parseInt(SLS);
                     st = conn.createStatement();
                     //Update
                     String sqlUpdate = "UPDATE Sach set TenSach = '"+this.Ten+
                             "', GiaSach = "+this.Gia+", SLS = "+this.SLS+
                             " WHERE MaS = "+this.MaS+";";
+                    System.out.println(sqlUpdate);
                     st.executeUpdate(sqlUpdate);
                     return true;
                 } catch (SQLException e) {
@@ -132,18 +134,41 @@ public class Sach {
         return false;
     }
 
+    public boolean capNhapSach(String MaS, String SLS) throws ClassNotFoundException{
+        if(KTMaS(MaS) && KTSLS(SLS)){
+            //Gan gia tri
+            this.MaS = Integer.parseInt(MaS);
+            this.SLS = Integer.parseInt(SLS);
+            //Cap nhap csdl
+            conn = ConnectionData.ConnectionTest();
+            if(conn != null&& TimSach(MaS)!= null){
+                try {
+                    //Gan gia tri
+                    this.SLS = Integer.parseInt(SLS);
+                    st = conn.createStatement();
+                    //Update
+                    String sqlUpdate = "UPDATE Sach set SLS = "+this.SLS+
+                            " WHERE MaS = "+this.MaS+";";
+                    st.executeUpdate(sqlUpdate);
+                    return true;
+                } catch (SQLException e) {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
     //Tim kiem sach
     public Sach TimSach(String MaS) throws ClassNotFoundException{
         if(KTMaS(MaS)){
             String sqlSelect = "SELECT * FROM Sach"
                     + " WHERE MaS = " + Integer.parseInt(MaS) +" ;";
             conn = ConnectionData.ConnectionTest();
-
             try{
                 if(conn != null){
-                    st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                            ResultSet.CONCUR_READ_ONLY);
+                    st = conn.createStatement();
                     ResultSet rs = st.executeQuery(sqlSelect);
+                    rs.next();
                     this.MaS = rs.getInt("MaS");
                     this.Ten = rs.getString("TenSach");
                     this.Gia = rs.getInt("GiaSach");
@@ -157,5 +182,9 @@ public class Sach {
             }
         }
         return null;
+    }
+    public static void main(String[] args) throws ClassNotFoundException {
+        Sach s = new Sach();
+        s.capNhapSach("2","100");
     }
 }
