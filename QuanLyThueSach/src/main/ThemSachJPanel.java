@@ -14,7 +14,6 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -29,8 +28,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
      */
     public ThemSachJPanel() {
         initComponents();
-        showData();
-        loadMaS();
+        init();
     }
 
     /**
@@ -240,12 +238,12 @@ public class ThemSachJPanel extends javax.swing.JPanel {
     }
     //trở về mặc định lúc thêm
     private void init(){
+        showData();
         jtfTenSach.setText("");
         jtfGiaChoThue.setText("");
         jtfSoLuong.setText("");
         loadMaS();
         jtfTenSach.requestFocus();
-        showData();
     }
     //show dữ vào bảng sách
     private void showData(){

@@ -92,6 +92,32 @@ public class KhachHang {
         return false;
     }
     
+    public boolean capNhapKH(String MaKH, String HoTen, String sdt) 
+            throws ClassNotFoundException{
+        if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
+            //Cap nhap csdl
+            conn = ConnectionData.ConnectionTest();
+            if(conn != null&& TimKH(MaKH)!= null){
+                try {
+                    //Gan gia tri
+                    this.MaKH = MaKH;
+                    this.HoTen = HoTen;
+                    this.SDT = sdt;
+                    st = conn.createStatement();
+                    //Update
+                    String sqlUpdate = "UPDATE KhachHang set MaKH = '"+this.MaKH+
+                            "', HoTen = N'"+this.HoTen+"', SDT = "+this.SDT+
+                            " WHERE MaKH = "+this.MaKH+";";
+                    System.out.println(sqlUpdate);
+                    st.executeUpdate(sqlUpdate);
+                    return true;
+                } catch (SQLException e) {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
     //lay thông tin khách hàng
     public KhachHang TimKH(String MaKH) throws ClassNotFoundException{
         if(KTMaKH(MaKH)){
