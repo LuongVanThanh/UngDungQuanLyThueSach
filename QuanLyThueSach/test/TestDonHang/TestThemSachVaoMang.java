@@ -96,7 +96,7 @@ public class TestThemSachVaoMang {
     @Test
     //Test case(1,7)(7 la so sach toi da co the muon)
     public void TestThemSachVaoMangCase11() throws ClassNotFoundException{
-        boolean actual = dh.ThemSach("1", "7");
+        boolean actual = dh.ThemSach("1", "5");
         boolean expected = true;
         Assert.assertEquals(expected, actual);
     }

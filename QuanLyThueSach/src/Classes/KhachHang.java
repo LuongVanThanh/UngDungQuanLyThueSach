@@ -43,7 +43,7 @@ public class KhachHang {
         return true;
     }
     private boolean KTsdt(String sdt){
-        if(sdt.length() == 11 || sdt.length() == 10){
+        if(sdt.length() == 10 && sdt.charAt(0) == '0'){
            try{
                if(Long.parseLong(sdt) > 0)
                 return true;
@@ -116,5 +116,24 @@ public class KhachHang {
             }
         }
         return null;
+    }
+    
+    public boolean CapNhapTHKH(String MaKH, String HoTen, String sdt) throws ClassNotFoundException{
+        if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
+            if(TimKH(MaKH)!= null){
+                conn = ConnectionData.ConnectionTest();
+                if(conn != null){
+                    try {
+                        st = conn.createStatement();
+                        String sqlUpdate = "UPDATE KhachHang SET HoTen =N'"+HoTen
+                                +"', sdt =N'"+sdt+"' WHERE MaKH= N'" +MaKH+"';";
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

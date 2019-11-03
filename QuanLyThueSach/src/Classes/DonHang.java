@@ -162,7 +162,6 @@ public class DonHang {
                     this.MaDH = rs.getInt("MaDH");
                     String sqlUpdate = "UPDATE DonHang SET TinhTrang = 1 "
                             + "WHERE MaDH = "+this.MaDH+";";
-                    System.out.println(sqlUpdate);
                     stI.executeUpdate(sqlUpdate);
                     return true;
                 }catch(SQLException ex){

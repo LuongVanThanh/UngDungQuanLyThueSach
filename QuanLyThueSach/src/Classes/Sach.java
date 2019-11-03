@@ -183,8 +183,4 @@ public class Sach {
         }
         return null;
     }
-    public static void main(String[] args) throws ClassNotFoundException {
-        Sach s = new Sach();
-        s.capNhapSach("2","100");
-    }
 }
