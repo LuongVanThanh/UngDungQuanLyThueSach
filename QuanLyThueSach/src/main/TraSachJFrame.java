@@ -29,7 +29,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jbtVTC1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbTraSach = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jtfTimKiem = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -73,8 +73,13 @@ public class TraSachJFrame extends javax.swing.JFrame {
                     .addComponent(jbtVTC1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbTraSach = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        jtbTraSach.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jtbTraSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -100,20 +105,18 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(40);
+        jScrollPane1.setViewportView(jtbTraSach);
+        if (jtbTraSach.getColumnModel().getColumnCount() > 0) {
+            jtbTraSach.getColumnModel().getColumn(0).setResizable(false);
+            jtbTraSach.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(1).setResizable(false);
+            jtbTraSach.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(2).setResizable(false);
+            jtbTraSach.getColumnModel().getColumn(2).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(3).setResizable(false);
+            jtbTraSach.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(4).setResizable(false);
+            jtbTraSach.getColumnModel().getColumn(4).setPreferredWidth(40);
         }
 
         jtfTimKiem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -229,8 +232,8 @@ public class TraSachJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtVTC1;
+    private javax.swing.JTable jtbTraSach;
     private javax.swing.JTextField jtfTimKiem;
     // End of variables declaration//GEN-END:variables
 }

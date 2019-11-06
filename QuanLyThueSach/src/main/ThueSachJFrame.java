@@ -1,6 +1,7 @@
 
 package main;
 
+import Classes.DonHang;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,13 +30,11 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jbtVTC = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbThueSach = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jtfMaKH = new javax.swing.JTextField();
         jtfMaS = new javax.swing.JTextField();
-        jtfSoLuong = new javax.swing.JTextField();
         jbtXuatPhieu = new javax.swing.JButton();
         jbtThem = new javax.swing.JButton();
 
@@ -77,13 +76,15 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                     .addComponent(jbtVTC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbThueSach = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        jtbThueSach.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jtbThueSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã KH", "Mã sách", "Tên khách hàng", "Tên sách", "SL", "Giá"
@@ -104,22 +105,22 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setResizingAllowed(false);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(30);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jtbThueSach.getTableHeader().setResizingAllowed(false);
+        jtbThueSach.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jtbThueSach);
+        if (jtbThueSach.getColumnModel().getColumnCount() > 0) {
+            jtbThueSach.getColumnModel().getColumn(0).setResizable(false);
+            jtbThueSach.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jtbThueSach.getColumnModel().getColumn(1).setResizable(false);
+            jtbThueSach.getColumnModel().getColumn(1).setPreferredWidth(30);
+            jtbThueSach.getColumnModel().getColumn(2).setResizable(false);
+            jtbThueSach.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jtbThueSach.getColumnModel().getColumn(3).setResizable(false);
+            jtbThueSach.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jtbThueSach.getColumnModel().getColumn(4).setResizable(false);
+            jtbThueSach.getColumnModel().getColumn(4).setPreferredWidth(10);
+            jtbThueSach.getColumnModel().getColumn(5).setResizable(false);
+            jtbThueSach.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -128,19 +129,9 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("Mã sách:");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel4.setText("Số lượng:");
-
         jtfMaKH.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jtfMaS.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-
-        jtfSoLuong.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jtfSoLuong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfSoLuongActionPerformed(evt);
-            }
-        });
 
         jbtXuatPhieu.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtXuatPhieu.setText("Xuất phiếu");
@@ -164,21 +155,17 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                     .addComponent(jbtXuatPhieu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jtfMaS, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfMaS, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addComponent(jtfMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -191,19 +178,15 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jtfMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jtfMaS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jtfSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbtThem)
                             .addComponent(jbtXuatPhieu))
-                        .addContainerGap(139, Short.MAX_VALUE))
+                        .addContainerGap(207, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
@@ -215,13 +198,10 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         new MainJFrame().setVisible(true);
     }//GEN-LAST:event_jbtVTCActionPerformed
 
+    
     private void jbtThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThemActionPerformed
-        //xóa
-    }//GEN-LAST:event_jbtThemActionPerformed
 
-    private void jtfSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSoLuongActionPerformed
-        //xóa
-    }//GEN-LAST:event_jtfSoLuongActionPerformed
+    }//GEN-LAST:event_jbtThemActionPerformed
 
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
         jtfMaKH.setEnabled(false);
@@ -277,15 +257,13 @@ public class ThueSachJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtThem;
     private javax.swing.JButton jbtVTC;
     private javax.swing.JButton jbtXuatPhieu;
+    private javax.swing.JTable jtbThueSach;
     private javax.swing.JTextField jtfMaKH;
     private javax.swing.JTextField jtfMaS;
-    private javax.swing.JTextField jtfSoLuong;
     // End of variables declaration//GEN-END:variables
 }
