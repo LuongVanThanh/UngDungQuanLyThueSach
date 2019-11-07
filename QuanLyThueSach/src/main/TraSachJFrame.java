@@ -25,6 +25,10 @@ public class TraSachJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jbtVTC1 = new javax.swing.JButton();
@@ -34,6 +38,34 @@ public class TraSachJFrame extends javax.swing.JFrame {
         jtfTimKiem = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jtbDHSach = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -81,13 +113,10 @@ public class TraSachJFrame extends javax.swing.JFrame {
         jtbTraSach.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jtbTraSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Mã khách hàng", "Mã sách", "Ngày Trả", "Thành tiền", "Trạng thái"
+                "Mã DH", "Mã khách hàng", "Ngày Trả", "Thành tiền", "Trạng thái"
             }
         ) {
             Class[] types = new Class [] {
@@ -108,9 +137,9 @@ public class TraSachJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jtbTraSach);
         if (jtbTraSach.getColumnModel().getColumnCount() > 0) {
             jtbTraSach.getColumnModel().getColumn(0).setResizable(false);
-            jtbTraSach.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(0).setPreferredWidth(20);
             jtbTraSach.getColumnModel().getColumn(1).setResizable(false);
-            jtbTraSach.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(1).setPreferredWidth(20);
             jtbTraSach.getColumnModel().getColumn(2).setResizable(false);
             jtbTraSach.getColumnModel().getColumn(2).setPreferredWidth(50);
             jtbTraSach.getColumnModel().getColumn(3).setResizable(false);
@@ -151,15 +180,55 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jtbDHSach = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        jtbDHSach.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã DH", "Mã sách", "Số lượng mượn"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jtbDHSach);
+        if (jtbDHSach.getColumnModel().getColumnCount() > 0) {
+            jtbDHSach.getColumnModel().getColumn(0).setResizable(false);
+            jtbDHSach.getColumnModel().getColumn(0).setPreferredWidth(20);
+            jtbDHSach.getColumnModel().getColumn(1).setResizable(false);
+            jtbDHSach.getColumnModel().getColumn(1).setPreferredWidth(20);
+            jtbDHSach.getColumnModel().getColumn(2).setResizable(false);
+            jtbDHSach.getColumnModel().getColumn(2).setPreferredWidth(50);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +236,10 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -232,7 +304,13 @@ public class TraSachJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JButton jbtVTC1;
+    private javax.swing.JTable jtbDHSach;
     private javax.swing.JTable jtbTraSach;
     private javax.swing.JTextField jtfTimKiem;
     // End of variables declaration//GEN-END:variables

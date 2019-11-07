@@ -37,6 +37,10 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         jtfMaS = new javax.swing.JTextField();
         jbtXuatPhieu = new javax.swing.JButton();
         jbtThem = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jlbNgayTra = new javax.swing.JLabel();
+        jlbTongTien = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,14 +91,14 @@ public class ThueSachJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã KH", "Mã sách", "Tên khách hàng", "Tên sách", "SL", "Giá"
+                "Mã sách", "Tên sách", "Số lượng thuê", "Giá"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -112,15 +116,11 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             jtbThueSach.getColumnModel().getColumn(0).setResizable(false);
             jtbThueSach.getColumnModel().getColumn(0).setPreferredWidth(50);
             jtbThueSach.getColumnModel().getColumn(1).setResizable(false);
-            jtbThueSach.getColumnModel().getColumn(1).setPreferredWidth(30);
+            jtbThueSach.getColumnModel().getColumn(1).setPreferredWidth(150);
             jtbThueSach.getColumnModel().getColumn(2).setResizable(false);
-            jtbThueSach.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jtbThueSach.getColumnModel().getColumn(2).setPreferredWidth(30);
             jtbThueSach.getColumnModel().getColumn(3).setResizable(false);
-            jtbThueSach.getColumnModel().getColumn(3).setPreferredWidth(100);
-            jtbThueSach.getColumnModel().getColumn(4).setResizable(false);
-            jtbThueSach.getColumnModel().getColumn(4).setPreferredWidth(10);
-            jtbThueSach.getColumnModel().getColumn(5).setResizable(false);
-            jtbThueSach.getColumnModel().getColumn(5).setPreferredWidth(50);
+            jtbThueSach.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -149,24 +149,43 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setText("Ngày trả: ");
+
+        jlbNgayTra.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+
+        jlbTongTien.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel5.setText("Tổng tiền:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                    .addComponent(jbtXuatPhieu))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jtfMaS, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(jtfMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbtXuatPhieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlbNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlbTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,11 +202,18 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jtfMaS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbtThem)
-                            .addComponent(jbtXuatPhieu))
-                        .addContainerGap(207, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jbtThem))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jlbNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlbTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(29, 29, 29)
+                .addComponent(jbtXuatPhieu)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -257,11 +283,15 @@ public class ThueSachJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtThem;
     private javax.swing.JButton jbtVTC;
     private javax.swing.JButton jbtXuatPhieu;
+    private javax.swing.JLabel jlbNgayTra;
+    private javax.swing.JLabel jlbTongTien;
     private javax.swing.JTable jtbThueSach;
     private javax.swing.JTextField jtfMaKH;
     private javax.swing.JTextField jtfMaS;
