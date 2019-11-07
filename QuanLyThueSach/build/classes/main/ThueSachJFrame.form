@@ -26,18 +26,23 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel3" alignment="1" max="32767" attributes="0"/>
                   <Component id="jLabel2" alignment="1" pref="138" max="32767" attributes="0"/>
+                  <Component id="jLabel6" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jtfMaS" alignment="1" pref="212" max="32767" attributes="0"/>
                   <Component id="jtfMaKH" alignment="1" pref="212" max="32767" attributes="0"/>
-                  <Component id="jbtThem" min="-2" pref="117" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jbtThem" min="-2" pref="117" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jtfSoLuong" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jbtXuatPhieu" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" pref="623" max="32767" attributes="0"/>
@@ -65,19 +70,24 @@
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfMaKH" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfMaS" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfSoLuong" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="jbtThem" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jlbNgayTra" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
@@ -156,7 +166,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jtbThueSach">
+        <Component class="javax.swing.JTable" name="jtbSach">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="20" style="0"/>
@@ -198,7 +208,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jtbThueSach = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jtbSach = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -240,6 +250,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t phi&#x1ebf;u"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbtXuatPhieuMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtThem">
       <Properties>
@@ -281,6 +294,21 @@
           <Font name="Arial" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfSoLuong">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="18" style="0"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
