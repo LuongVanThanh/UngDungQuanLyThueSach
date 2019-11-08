@@ -112,7 +112,7 @@ public class TestCapNhapSach {
     @Test
     //Test case(MaS = 1, ten = Minh, gia = 5, SLS = 1)-->true
     public void TestCapNhapSachCase12() throws ClassNotFoundException{
-        boolean actual = s.capNhapSach("1", "Minh", "5", "7");
+        boolean actual = s.capNhapSach("1", "Minh", "5000", "70");
         boolean expected = true;
         Assert.assertEquals(expected, actual);
     }
@@ -175,7 +175,7 @@ public class TestCapNhapSach {
     @Test
     //Test case(MaS = 1, SLS = 1)
     public void TestCapNhapSachCase21() throws ClassNotFoundException{
-        boolean actual = s.capNhapSach("1", "1");
+        boolean actual = s.capNhapSach("1", "60");
         boolean expected = true;
         Assert.assertEquals(expected, actual);
     }

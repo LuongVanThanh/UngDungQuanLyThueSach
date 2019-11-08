@@ -21,8 +21,6 @@ public class TestThemDonHang {
     //Test case("Chuoi")
     public void TestThemDonHangCase1() throws ClassNotFoundException{
         dh.ThemSach("1", "1");
-        dh.ThemSach("2", "1");
-        dh.ThemSach("3", "1");
         boolean actual = dh.ThemDonHang("day la chuoi");
         boolean expected = false;
         Assert.assertEquals(expected, actual);
@@ -31,8 +29,6 @@ public class TestThemDonHang {
     //Test case("")
     public void TestThemDonHangCase2() throws ClassNotFoundException{
         dh.ThemSach("1", "1");
-        dh.ThemSach("2", "1");
-        dh.ThemSach("3", "1");
         boolean actual = dh.ThemDonHang("");
         boolean expected = false;
         Assert.assertEquals(expected, actual);
@@ -41,8 +37,6 @@ public class TestThemDonHang {
     //Test case("-5")
     public void TestThemDonHangCase3() throws ClassNotFoundException{
         dh.ThemSach("1", "1");
-        dh.ThemSach("2", "1");
-        dh.ThemSach("3", "1");
         boolean actual = dh.ThemDonHang("-5");
         boolean expected = false;
         Assert.assertEquals(expected, actual);
@@ -51,8 +45,6 @@ public class TestThemDonHang {
     //Test case("0")
     public void TestThemDonHangCase4() throws ClassNotFoundException{
         dh.ThemSach("1", "1");
-        dh.ThemSach("2", "1");
-        dh.ThemSach("3", "1");
         boolean actual = dh.ThemDonHang("0");
         boolean expected = false;
         Assert.assertEquals(expected, actual);
@@ -61,8 +53,6 @@ public class TestThemDonHang {
     //Test case("7")
     public void TestThemDonHangCase5() throws ClassNotFoundException{
         dh.ThemSach("1", "1");
-        dh.ThemSach("2", "1");
-        dh.ThemSach("3", "1");
         boolean actual = dh.ThemDonHang("7");
         boolean expected = false;
         Assert.assertEquals(expected, actual);
@@ -71,8 +61,6 @@ public class TestThemDonHang {
     //Test case(9 so)
     public void TestThemDonHangCase6() throws ClassNotFoundException{
         dh.ThemSach("1", "1");
-        dh.ThemSach("2", "1");
-        dh.ThemSach("3", "1");
         boolean actual = dh.ThemDonHang("123456789");
         boolean expected = true;
         Assert.assertEquals(expected, actual);
@@ -80,9 +68,7 @@ public class TestThemDonHang {
     @Test
     //Test case(12 so)
     public void TestThemDonHangCase7() throws ClassNotFoundException{
-        dh.ThemSach("4", "1");
-        dh.ThemSach("5", "1");
-        dh.ThemSach("6", "1");
+        dh.ThemSach("1", "5");
         boolean actual = dh.ThemDonHang("323456789012");
         boolean expected = true;
         Assert.assertEquals(expected, actual);

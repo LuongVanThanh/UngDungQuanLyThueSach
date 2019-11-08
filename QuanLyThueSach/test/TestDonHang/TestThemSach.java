@@ -93,7 +93,7 @@ public class TestThemSach {
         Assert.assertEquals(expected, actual);
     }
     @Test
-    //Test case(1,7)(7 la so sach toi da co the muon)
+    //Test case(1,7)(7 so sach muon vuot qua 5)
     public void TestThemSachVaoMangCase11() throws ClassNotFoundException{
         boolean actual = dh.ThemSach("1", "7");
         boolean expected = true;

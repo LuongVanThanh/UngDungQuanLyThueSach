@@ -120,10 +120,9 @@ public class Sach {
                     this.SLS = Integer.parseInt(SLS);
                     st = conn.createStatement();
                     //Update
-                    String sqlUpdate = "UPDATE Sach set TenSach = '"+this.Ten+
+                    String sqlUpdate = "UPDATE Sach set TenSach = N'"+this.Ten+
                             "', GiaSach = "+this.Gia+", SLS = "+this.SLS+
                             " WHERE MaS = "+this.MaS+";";
-                    System.out.println(sqlUpdate);
                     st.executeUpdate(sqlUpdate);
                     return true;
                 } catch (SQLException e) {

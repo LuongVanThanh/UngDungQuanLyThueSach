@@ -67,7 +67,7 @@ public class TestThemSach {
     @Test
     //test case("Minh", 5, -5)-->pass
     public void TestThemSachCase6() throws ClassNotFoundException{
-        boolean actual = s.ThemSach("Minh", "5", "5");
+        boolean actual = s.ThemSach("Minh", "5000", "50");
         boolean expected = true;
         Assert.assertEquals(expected, actual);
     }

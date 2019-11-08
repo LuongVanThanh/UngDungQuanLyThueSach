@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -37,7 +39,9 @@ public class KhachHang {
         return false;
     }
     private boolean KTHoTen (String HoTen){
-        if(HoTen.length() > 50){
+        Pattern regex = Pattern.compile("[$&+,:;=?@#|]"); 
+        Matcher matcher = regex.matcher("123=456"); 
+        if(HoTen.length() > 50 || matcher.find()){
             return false;
         }
         return true;

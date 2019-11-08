@@ -18,7 +18,7 @@ public class ConnectionData {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(connectionURL);
         } catch (SQLException ex) {
-            System.err.println(ex.toString());
+            return null;
         }
         return conn;
     }

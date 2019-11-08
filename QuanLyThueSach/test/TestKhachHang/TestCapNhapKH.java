@@ -144,10 +144,10 @@ public class TestCapNhapKH {
         Assert.assertEquals(expected, actual);
     }
     @Test
-    //Test case (MaKH = 12so , Ten < 50, chu)//Khong co trong csdl
+    //Test case (MaKH = 12so , Ten < 50, sdt)//Khong co trong csdl
     public void TestThemKhachHangCase18() throws ClassNotFoundException{
         boolean actual = kh.CapNhapTHKH("923456789012", "Minh", "0704407256");
-        boolean expected = true;
+        boolean expected = false;
         Assert.assertEquals(expected, actual);
     }
 }

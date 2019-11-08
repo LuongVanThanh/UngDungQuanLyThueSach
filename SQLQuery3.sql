@@ -14,8 +14,10 @@ CREATE TABLE DonHang
 (
 	MaDH INT IDENTITY(1,1),
 	MaKH nvarchar(20),
+	NgayMuon Date,
 	NgayTra Date,
 	ThanhTien INT,
+	TienPhat INT,
 	TinhTrang BIT,
 	PRIMARY KEY (MaDH),
 	FOREIGN KEY (MaKH) references KhachHang
