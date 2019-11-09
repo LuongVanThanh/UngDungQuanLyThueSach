@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -37,13 +39,15 @@ public class KhachHang {
         return false;
     }
     private boolean KTHoTen (String HoTen){
-        if(HoTen.length() > 50){
+        Pattern regex = Pattern.compile("[$&+,:;=?@#|]"); 
+        Matcher matcher = regex.matcher("123=456"); 
+        if(HoTen.length() > 50 || matcher.find()){
             return false;
         }
         return true;
     }
     private boolean KTsdt(String sdt){
-        if(sdt.length() == 11 || sdt.length() == 10){
+        if(sdt.length() == 10 && sdt.charAt(0) == '0'){
            try{
                if(Long.parseLong(sdt) > 0)
                 return true;
@@ -91,7 +95,6 @@ public class KhachHang {
         }
         return false;
     }
-    
     public boolean capNhapKH(String MaKH, String HoTen, String sdt) 
             throws ClassNotFoundException{
         if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
@@ -142,5 +145,23 @@ public class KhachHang {
             }
         }
         return null;
+    }
+    public boolean CapNhapTHKH(String MaKH, String HoTen, String sdt) throws ClassNotFoundException{
+        if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
+            if(TimKH(MaKH)!= null){
+                conn = ConnectionData.ConnectionTest();
+                if(conn != null){
+                    try {
+                        st = conn.createStatement();
+                        String sqlUpdate = "UPDATE KhachHang SET HoTen =N'"+HoTen
+                                +"', sdt =N'"+sdt+"' WHERE MaKH= N'" +MaKH+"';";
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

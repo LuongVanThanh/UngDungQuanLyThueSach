@@ -116,14 +116,14 @@ public class TraSachJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã DH", "Mã khách hàng", "Ngày Trả", "Thành tiền", "Trạng thái"
+                "Mã DH", "Mã khách hàng", "Ngày mượn", "Ngày trả", "Thành tiền", "Tiền phạt", "Trạng thái"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -145,7 +145,10 @@ public class TraSachJFrame extends javax.swing.JFrame {
             jtbTraSach.getColumnModel().getColumn(3).setResizable(false);
             jtbTraSach.getColumnModel().getColumn(3).setPreferredWidth(50);
             jtbTraSach.getColumnModel().getColumn(4).setResizable(false);
-            jtbTraSach.getColumnModel().getColumn(4).setPreferredWidth(40);
+            jtbTraSach.getColumnModel().getColumn(4).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(5).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(6).setResizable(false);
+            jtbTraSach.getColumnModel().getColumn(6).setPreferredWidth(40);
         }
 
         jtfTimKiem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N

@@ -123,7 +123,6 @@ public class Sach {
                     String sqlUpdate = "UPDATE Sach set TenSach = N'"+this.Ten+
                             "', GiaSach = "+this.Gia+", SLS = "+this.SLS+
                             " WHERE MaS = "+this.MaS+";";
-                    System.out.println(sqlUpdate);
                     st.executeUpdate(sqlUpdate);
                     return true;
                 } catch (SQLException e) {
@@ -182,9 +181,5 @@ public class Sach {
             }
         }
         return null;
-    }
-    public static void main(String[] args) throws ClassNotFoundException {
-        Sach s = new Sach();
-        s.capNhapSach("2","100");
     }
 }

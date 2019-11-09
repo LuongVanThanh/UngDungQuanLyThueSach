@@ -21,7 +21,9 @@ import java.util.ArrayList;
 public class DonHang {
     private int MaDH;
     private String MaKH;
+    private Date NgayMuon;
     private Date NgayTra;
+    private int TienPhat;
     private int ThanhTien;
     private boolean TinhTrang;
     
@@ -47,12 +49,6 @@ public class DonHang {
         }
         return false;
     }
-    //Thiet lap ngay tra sach
-    private void ThietLapNgayTra(){
-        LocalDate temp = LocalDate.now();
-        temp = temp.plusMonths(1);
-        this.NgayTra = Date.valueOf(temp);
-    }
     //Tinh tong tien khach hang phai tra
     private int TinhTien(){
         int temp = 0;
@@ -60,6 +56,14 @@ public class DonHang {
             temp += arrDH_Sach.get(i).getGiaMuon();
         }
         return temp;
+    }
+    //Dem so luon sach muon
+    private int SoSachMuon(){
+        int sm = 0;
+        for(int i = 0; i < arrDH_Sach.size(); i++){
+            sm += arrDH_Sach.get(i).getSLM();
+        }
+        return sm;
     }
     //Them vao mang
     public boolean ThemSach(String MaS, String SLM) throws ClassNotFoundException{
@@ -98,7 +102,7 @@ public class DonHang {
         if(KTMaKH(MaKH) && KTTinhTrang(MaKH)==true && arrDH_Sach != null){
             //gan gia tri
             this.MaKH = MaKH;
-            ThietLapNgayTra();
+            this.NgayMuon = Date.valueOf(LocalDate.now());
             this.ThanhTien = TinhTien();
             //Luu vao csdl
             this.conn = ConnectionData.ConnectionTest();
@@ -107,9 +111,9 @@ public class DonHang {
                     stI = conn.createStatement();
                     stR = conn.createStatement();
                     //Insert bang DonHang
-                    String sqlInsert = "INSERT INTO DonHang(MaKH, NgayTra, ThanhTien, TinhTrang) "
+                    String sqlInsert = "INSERT INTO DonHang(MaKH, NgayMuon, ThanhTien, TinhTrang) "
                             + "VALUES (N'"+this.MaKH+"', '"
-                            +this.NgayTra+ "', "+this.ThanhTien+"," +"'0'"+ ");";
+                            +this.NgayMuon+ "', "+this.ThanhTien+"," +"'0'"+ ");";
                     stI.executeUpdate(sqlInsert);
                     //Lay MaDH
                     String sqlGetMaDH = "SELECT MaDH From DonHang Where MaDH = "
@@ -133,8 +137,7 @@ public class DonHang {
                         int soSachCon = SLS - arrDH_Sach.get(i).getSLM();
                         temp.capNhapSach(Integer.toString(arrDH_Sach.get(i).getMaS())
                                 , Integer.toString(soSachCon));
-                        System.out.println(arrDH_Sach.get(i).getMaS() + " " + soSachCon);
-                    }
+                        }
                     return true;
                 }
                 catch(SQLException ex){
@@ -144,7 +147,15 @@ public class DonHang {
         }
         return false;
     }
-    //Tra sach
+    //tinh so tien phat
+    private int TinhTienPhat(){
+        long tempDate = this.NgayTra.getTime() - this.NgayMuon.getTime();
+        tempDate = (tempDate / 86400000);
+        if(tempDate > 30){
+            return (int) ((tempDate-30) *5000);
+        }
+        return 0;
+    }
     public boolean TraSach(String MaKH) throws ClassNotFoundException{
         if(KTMaKH(MaKH) && KTTinhTrang(MaKH) != true){
             this.conn = ConnectionData.ConnectionTest();
@@ -160,12 +171,20 @@ public class DonHang {
                     ResultSet rs = stR.executeQuery(sqlGetMaDH);
                     rs.next();
                     this.MaDH = rs.getInt("MaDH");
-                    String sqlUpdate = "UPDATE DonHang SET TinhTrang = 1 "
-                            + "WHERE MaDH = "+this.MaDH+";";
-                    System.out.println(sqlUpdate);
+                    sqlGetMaDH = "SELECT * FROM DonHang Where MaDH = "
+                            +this.MaDH+";";
+                    rs = stR.executeQuery(sqlGetMaDH);
+                    rs.next();
+                    this.NgayMuon = rs.getDate("NgayMuon");
+                    this.NgayTra = Date.valueOf(LocalDate.now());
+                    this.TienPhat = TinhTienPhat();
+                    String sqlUpdate = "UPDATE DonHang SET TinhTrang = 1, NgayTra = '"
+                            +this.NgayTra+"', TienPhat = "+this.TienPhat 
+                            +" WHERE MaDH = "+this.MaDH+";";
                     stI.executeUpdate(sqlUpdate);
                     return true;
                 }catch(SQLException ex){
+                    System.err.println(ex.toString());
                     return false;
                 }
             }
