@@ -87,6 +87,11 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                 jbtCapNhatKHMouseClicked(evt);
             }
         });
+        jbtCapNhatKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtCapNhatKHActionPerformed(evt);
+            }
+        });
 
         jtbKH = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -315,6 +320,10 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_jbtCapNhatKHMouseClicked
+
+    private void jbtCapNhatKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCapNhatKHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtCapNhatKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
