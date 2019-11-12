@@ -27,8 +27,10 @@ public class KhachHang {
     private boolean KTMaKH(String MaKH){
         if((MaKH.length() == 9) || (MaKH.length() == 12)){
             try {
-                if(Long.parseLong(MaKH) > 0)
-                    return true;
+                for(int i = 0; i < MaKH.length(); i++){
+                    if(!Character.isDigit(MaKH.charAt(i)))
+                        return false;
+                }
             }
             catch (NumberFormatException ex){
                 return false;
@@ -50,8 +52,10 @@ public class KhachHang {
     private boolean KTsdt(String sdt){
         if(sdt.length() == 10 && sdt.charAt(0) == '0'){
            try{
-               if(Long.parseLong(sdt) > 0)
-                return true;
+               for(int i = 0; i < sdt.length(); i++){
+                   if(Character.isDigit(sdt.charAt(i)))
+                       return false;
+               }
            }
            catch(NumberFormatException ex){
                return false;
