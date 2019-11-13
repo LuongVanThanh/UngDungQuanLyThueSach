@@ -1,11 +1,23 @@
 
 package main;
 
+import Classes.ConnectionData;
+import Classes.DonHang;
+import Classes.KhachHang;
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class TraSachJFrame extends javax.swing.JFrame {
 
@@ -14,6 +26,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
         setTitle("Trả Sách");
         setLocation(300, 150);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/IconApp.png")));
+        loadDaTaDH();
     }
 
     /**
@@ -35,11 +48,12 @@ public class TraSachJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbTraSach = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jtfTimKiem = new javax.swing.JTextField();
+        jtfMaKH = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtbDHSach = new javax.swing.JTable();
+        jbtTraSach = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,6 +83,11 @@ public class TraSachJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 255));
 
@@ -134,6 +153,12 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtbTraSach.getTableHeader().setReorderingAllowed(false);
+        jtbTraSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbTraSachMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbTraSach);
         if (jtbTraSach.getColumnModel().getColumnCount() > 0) {
             jtbTraSach.getColumnModel().getColumn(0).setResizable(false);
@@ -151,43 +176,25 @@ public class TraSachJFrame extends javax.swing.JFrame {
             jtbTraSach.getColumnModel().getColumn(6).setPreferredWidth(40);
         }
 
-        jtfTimKiem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jtfMaKH.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton1.setText("Tìm kiếm");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Mã KH:");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jtbDHSach = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
+        jtbDHSach.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jtbDHSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -211,6 +218,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtbDHSach.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jtbDHSach);
         if (jtbDHSach.getColumnModel().getColumnCount() > 0) {
             jtbDHSach.getColumnModel().getColumn(0).setResizable(false);
@@ -221,6 +229,46 @@ public class TraSachJFrame extends javax.swing.JFrame {
             jtbDHSach.getColumnModel().getColumn(2).setPreferredWidth(50);
         }
 
+        jbtTraSach.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbtTraSach.setText("Trả sách");
+        jbtTraSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtTraSachMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                    .addComponent(jbtTraSach, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfMaKH))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(jbtTraSach)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,10 +276,8 @@ public class TraSachJFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,20 +285,153 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void traSach(String maKH){
+        
+    }
+    
+    private void loadDaTaDH(){
+        try{
+            jtbTraSach.removeAll();
+            String[] arr = {"Mã DH", "Mã KH", "Ngày mượn", "Ngày trả", "Thành tiền", "Tiền phạt", "Trạng thái"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            Connection conn = ConnectionData.ConnectionTest();
+            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DonHang]");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Vector v = new Vector();
+                v.add(rs.getInt("MaDH"));
+                v.add(rs.getString("MaKH"));
+                v.add(rs.getDate("NgayMuon"));
+                v.add(rs.getDate("NgayTra"));
+                v.add(rs.getInt("ThanhTien"));
+                v.add(rs.getInt("TienPhat"));
+                v.add(rs.getInt("TinhTrang"));
+                model.addRow(v);
+            }
+            jtbTraSach.setModel(model);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void loadDaTaDH(String maKH){
+        try{
+            jtbTraSach.removeAll();
+            String[] arr = {"Mã DH", "Mã KH", "Ngày mượn", "Ngày trả", "Thành tiền", "Tiền phạt", "Trạng thái"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            Connection conn = ConnectionData.ConnectionTest();
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.[DonHang] WHERE MaKH = " + maKH);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Vector v = new Vector();
+                v.add(rs.getInt("MaDH"));
+                v.add(rs.getString("MaKH"));
+                v.add(rs.getDate("NgayMuon"));
+                v.add(rs.getDate("NgayTra"));
+                v.add(rs.getInt("ThanhTien"));
+                v.add(rs.getInt("TienPhat"));
+                v.add(rs.getInt("TinhTrang"));
+                model.addRow(v);
+            }
+            jtbTraSach.setModel(model);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void loadDaTaSach(String maDH){
+        try{
+            jtbDHSach.removeAll();
+            String[] arr = {"Mã DH", "Mã Sách", "Số lượng mượn"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            Connection conn = ConnectionData.ConnectionTest();
+            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DH_SACH] WHERE MaDH = " + maDH);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Vector v = new Vector();
+                v.add(rs.getInt("MaDH"));
+                v.add(rs.getInt("MaS"));
+                v.add(rs.getInt("SLM"));
+                model.addRow(v);
+            }
+            jtbDHSach.setModel(model);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     private void jbtVTC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVTC1ActionPerformed
         this.setVisible(false);
         new MainJFrame().setVisible(true);
     }//GEN-LAST:event_jbtVTC1ActionPerformed
+
+    private void jtbTraSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbTraSachMouseClicked
+        int i = jtbTraSach.getSelectedRow();
+        TableModel model = jtbTraSach.getModel();
+        String maDH = model.getValueAt(i, 0).toString();
+        int tinhTrang = Integer.parseInt(model.getValueAt(i, 6).toString());
+        loadDaTaSach(maDH);
+        if(tinhTrang == 0)
+            jbtTraSach.setForeground(Color.red);
+        else
+            jbtTraSach.setForeground(Color.black);
+    }//GEN-LAST:event_jtbTraSachMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        try{
+            String maKH = jtfMaKH.getText();
+            KhachHang kh = new KhachHang();
+            if ("".equals(maKH)) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã khách hàng!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfMaKH.requestFocus();
+            } else if(kh.TimKH(maKH) == null){
+                JOptionPane.showMessageDialog(null, "Mã khách hàng không hợp lệ!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfMaKH.requestFocus();
+            } else
+                loadDaTaDH(maKH);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int result = JOptionPane.showConfirmDialog(null, "Bạn Có Muốn Thoát Khỏi Chương Trình Hay Không?", "Thông Báo", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION)
+            //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            System.exit(0);
+        else if(result == JOptionPane.CANCEL_OPTION)
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jbtTraSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtTraSachMouseClicked
+        if(jtbTraSach.getSelectedRow() != -1){
+            int i = jtbTraSach.getSelectedRow();
+            TableModel model = jtbTraSach.getModel();
+            String maKH = model.getValueAt(i, 1).toString();
+            int tinhTrang = Integer.parseInt(model.getValueAt(i, 6).toString());
+            if(tinhTrang == 1){
+                JOptionPane.showMessageDialog(null, "Sách đã trả rồi!!!", "Thông Báo", JOptionPane.DEFAULT_OPTION);
+            } else{
+                try {
+                    int result = JOptionPane.showConfirmDialog(null, "Khách hàng trả sách???", "Thông Báo", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.YES_OPTION) {
+                        DonHang dh = new DonHang();
+                        dh.TraSach(maKH);
+                        loadDaTaDH();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_jbtTraSachMouseClicked
 
     /**
      * @param args the command line arguments
@@ -284,6 +463,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                //xuất màn hình giống form giống hệ thống trên máy
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (ClassNotFoundException ex) {
@@ -312,9 +492,10 @@ public class TraSachJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JButton jbtTraSach;
     private javax.swing.JButton jbtVTC1;
     private javax.swing.JTable jtbDHSach;
     private javax.swing.JTable jtbTraSach;
-    private javax.swing.JTextField jtfTimKiem;
+    private javax.swing.JTextField jtfMaKH;
     // End of variables declaration//GEN-END:variables
 }
