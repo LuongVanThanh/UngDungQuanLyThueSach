@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -34,6 +35,8 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         jtfMaKH.setText(maKH);
         jtfMaKH.setEnabled(false);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +67,11 @@ public class ThueSachJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 255));
 
@@ -349,6 +357,15 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         }
         init();
     }//GEN-LAST:event_jbtXuatPhieuMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int result = JOptionPane.showConfirmDialog(null, "Bạn Có Muốn Thoát Khỏi Chương Trình Hay Không?", "Thông Báo", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION)
+            //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            System.exit(0);
+        else if(result == JOptionPane.CANCEL_OPTION)
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
