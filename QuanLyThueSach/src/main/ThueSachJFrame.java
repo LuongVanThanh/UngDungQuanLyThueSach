@@ -24,6 +24,16 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/IconApp.png")));
         init();
     }
+    
+    public ThueSachJFrame(String maKH) {
+        initComponents();
+        setTitle("Thuê Sách");
+        setLocation(300, 150);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/IconApp.png")));
+        init();
+        jtfMaKH.setText(maKH);
+        jtfMaKH.setEnabled(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -85,11 +87,6 @@ public class ThemKHJPanel extends javax.swing.JPanel {
         jbtCapNhatKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtCapNhatKHMouseClicked(evt);
-            }
-        });
-        jbtCapNhatKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtCapNhatKHActionPerformed(evt);
             }
         });
 
@@ -238,7 +235,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Vector v = new Vector();
-                v.add(rs.getInt("MaKH"));
+                v.add(rs.getString("MaKH"));
                 v.add(rs.getString("HoTen"));
                 v.add(rs.getString("SDT"));
                 model.addRow(v);
@@ -268,6 +265,12 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                     KhachHang s = new KhachHang();
                     if (s.ThemKH(maKH, hoTen, soDT) == true) {
                         init();
+                        int res = JOptionPane.showConfirmDialog(null, "Bạn có muốn chuyển sang form thuê sách???", "Thông báo", JOptionPane.YES_NO_OPTION);
+                        if(res == JOptionPane.YES_OPTION){
+                            ThueSachJFrame tsj = new ThueSachJFrame(maKH);
+                        this.getTopLevelAncestor().setVisible(false);
+                        tsj.setVisible(true);
+                        }
                     } else {
                         throw new Exception("Dữ liệu không hợp lệ!");
                     }
@@ -320,10 +323,6 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_jbtCapNhatKHMouseClicked
-
-    private void jbtCapNhatKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCapNhatKHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtCapNhatKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
