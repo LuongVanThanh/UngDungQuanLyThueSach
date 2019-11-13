@@ -268,6 +268,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                         int res = JOptionPane.showConfirmDialog(null, "Bạn có muốn chuyển sang form thuê sách???", "Thông báo", JOptionPane.YES_NO_OPTION);
                         if(res == JOptionPane.YES_OPTION){
                             ThueSachJFrame tsj = new ThueSachJFrame(maKH);
+                        // lấy jframe đang chứa nó ẩn đi
                         this.getTopLevelAncestor().setVisible(false);
                         tsj.setVisible(true);
                         }

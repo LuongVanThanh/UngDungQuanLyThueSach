@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import org.omg.IOP.CodecPackage.FormatMismatch;
 
 public class ThueSachJFrame extends javax.swing.JFrame {
@@ -176,11 +177,6 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                 jbtThemMouseClicked(evt);
             }
         });
-        jbtThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtThemActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Ngày trả: ");
@@ -287,9 +283,14 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         jlbTongTien.setText("");
     }
     
-
-    private void jbtThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThemActionPerformed
-    }//GEN-LAST:event_jbtThemActionPerformed
+    private boolean xetMaS(String maS){
+        TableModel model = jtbSach.getModel();
+        for(int i = 0; i < model.getRowCount(); i++){
+            if(maS.equals(model.getValueAt(i, 0).toString()))
+                return true;
+        }
+        return false;
+    }
 
     //thêm từng cuốn sách vào bảng và add vào đối tượng dh(đơn hàng)
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
@@ -315,6 +316,9 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             } else if(s.TimSach(maS) == null){
                 JOptionPane.showMessageDialog(null, "Dữ liệu mã sách không đúng!!!", "Error", JOptionPane.ERROR_MESSAGE);
                 jtfMaS.requestFocus();
+            } else if(soLM <= 0){
+                JOptionPane.showMessageDialog(null, "Dữ liệu số lượng không hợp lệ!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfSoLuong.requestFocus();
             } else{
                 jtfMaKH.setEnabled(false);
                 if(soLM <= s.getSLS()){
@@ -350,12 +354,16 @@ public class ThueSachJFrame extends javax.swing.JFrame {
 
     private void jbtXuatPhieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtXuatPhieuMouseClicked
         //thêm dữ liệu vào sql
-        try {
-            dh.ThemDonHang(jtfMaKH.getText());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ThueSachJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        if(jtbSach.getRowCount() == 0)
+            JOptionPane.showMessageDialog(null, "Dữ liệu sách thuê chưa có!!!", "Error", JOptionPane.ERROR_MESSAGE);
+        else{
+            try {
+                dh.ThemDonHang(jtfMaKH.getText());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ThueSachJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            init();
         }
-        init();
     }//GEN-LAST:event_jbtXuatPhieuMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
