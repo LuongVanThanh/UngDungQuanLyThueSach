@@ -283,15 +283,71 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         jlbTongTien.setText("");
     }
     
-    private boolean xetMaS(String maS){
-        TableModel model = jtbSach.getModel();
-        for(int i = 0; i < model.getRowCount(); i++){
-            if(maS.equals(model.getValueAt(i, 0).toString()))
-                return true;
+    //thêm sách vào jtbSach
+    private void themSachVaoTable(String maS, int soLM){
+        try{
+            TableModel model1 = jtbSach.getModel();
+            Sach s = new Sach().TimSach(maS);
+            int sLM = soLM;
+            for (int i = 0; i < model1.getRowCount(); i++) {
+                if (maS.equals(model1.getValueAt(i, 0).toString())) {
+                    int sLDM = Integer.parseInt(model.getValueAt(i, 2).toString());
+                    sLM += sLDM;
+                    if (s.TimSach(maS) != null) {
+                        if(sLM <= s.getSLS()){
+                            model1.setValueAt(sLM, i, 2);
+                            model1.setValueAt(sLM * s.getGia(), i, 3);
+                            t += s.getGia() * soLM;
+                            jlbTongTien.setText(String.format("%,.2f VNĐ", t));
+                            jtfMaS.setText("");
+                            jtfSoLuong.setText("");
+                            jtfMaS.requestFocus();
+                            return;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Số lượng sách không đủ!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                            jtfSoLuong.requestFocus();
+                            return;
+                        }   
+                    }
+                }
+            }
+            if(sLM <= s.getSLS()){
+                Vector v = new Vector();
+                v.add(maS);
+                v.add(s.getTenSach());
+                v.add(soLM);
+                v.add(s.getGia() * soLM);
+                model.addRow(v);
+                jtbSach.setModel(model);
+                jtfMaS.setText("");
+                jtfSoLuong.setText("");
+                jtfMaS.requestFocus();
+                if ("".equals(jlbNgayTra.getText())) //xuất ngày trả và format dd-MM-yyyy
+                    jlbNgayTra.setText(LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
+                t += s.getGia() * sLM;
+                jlbTongTien.setText(String.format("%,.2f VNĐ", t));
+            } else {
+                JOptionPane.showMessageDialog(null, "Số lượng sách không đủ!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfSoLuong.requestFocus();
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        return false;
     }
 
+    //thêm sách từ jtbSach vào cho đối tượng dh
+    private void themSachVaoDH(){
+        TableModel model1 = jtbSach.getModel();
+        for(int i = 0; i < model1.getRowCount(); i++){
+            String maS = model1.getValueAt(i, 0).toString();
+            String sLM = model1.getValueAt(i, 2).toString();
+            try {
+                dh.ThemSach(maS, sLM);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ThueSachJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     //thêm từng cuốn sách vào bảng và add vào đối tượng dh(đơn hàng)
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
         try {
@@ -321,31 +377,8 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                 jtfSoLuong.requestFocus();
             } else{
                 jtfMaKH.setEnabled(false);
-                if(soLM <= s.getSLS()){
-                    dh.ThemSach(maS, String.valueOf(soLM));
-                    Vector v = new Vector();
-                    v.add(maS);
-                    v.add(s.getTenSach());
-                    v.add(soLM);
-                    v.add(s.getGia()*soLM);
-                    model.addRow(v);
-                    jtbSach.setModel(model);
-                    jtfMaS.setText("");
-                    jtfSoLuong.setText("");
-                    jtfMaS.requestFocus();
-                    if("".equals(jlbNgayTra.getText()))
-                        //xuất ngày trả và format dd-MM-yyyy
-                        jlbNgayTra.setText(LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
-                    t += s.getGia() * soLM;
-                    //xuất tổng tiền của đơn hàng
-                    jlbTongTien.setText(String.format("%,.2f VNĐ", t));
-                } else {
-                    JOptionPane.showMessageDialog(null, "Số lượng sách không đủ!!!", "Error", JOptionPane.ERROR_MESSAGE);
-                    jtfSoLuong.requestFocus();
-                }
-                    
+                themSachVaoTable(maS, soLM);
             }
-
         }catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Dữ liệu số lượng hơp lệ!!!", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -358,11 +391,12 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Dữ liệu sách thuê chưa có!!!", "Error", JOptionPane.ERROR_MESSAGE);
         else{
             try {
-                dh.ThemDonHang(jtfMaKH.getText());
+                themSachVaoDH();
+                if(dh.ThemDonHang(jtfMaKH.getText()) == true)
+                    init();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ThueSachJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-            init();
         }
     }//GEN-LAST:event_jbtXuatPhieuMouseClicked
 
