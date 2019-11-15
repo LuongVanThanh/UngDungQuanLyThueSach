@@ -285,7 +285,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,9 +300,6 @@ public class TraSachJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void traSach(String maKH){
-        
-    }
     
     private void loadDaTaDH(){
         try{
@@ -335,7 +332,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             String[] arr = {"Mã DH", "Mã KH", "Ngày mượn", "Ngày trả", "Thành tiền", "Tiền phạt", "Trạng thái"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
             Connection conn = ConnectionData.ConnectionTest();
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.[DonHang] WHERE MaKH = " + maKH);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.[DonHang] WHERE MaKH = " + "'" + maKH + "'");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Vector v = new Vector();
@@ -360,7 +357,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             String[] arr = {"Mã DH", "Mã Sách", "Số lượng mượn"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
             Connection conn = ConnectionData.ConnectionTest();
-            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DH_SACH] WHERE MaDH = " + maDH);
+            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DH_SACH] WHERE MaDH = " + "'" + maDH + "'");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Vector v = new Vector();

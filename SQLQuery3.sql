@@ -14,15 +14,8 @@ CREATE TABLE DonHang
 (
 	MaDH INT IDENTITY(1,1),
 	MaKH nvarchar(20),
-<<<<<<< HEAD
-	NgayMuon Date,
 	NgayTra Date,
 	ThanhTien INT,
-	TienPhat INT,
-=======
-	NgayTra Date,
-	ThanhTien INT,
->>>>>>> HoaiThanh
 	TinhTrang BIT,
 	PRIMARY KEY (MaDH),
 	FOREIGN KEY (MaKH) references KhachHang
@@ -32,11 +25,7 @@ GO
 CREATE TABLE Sach
 (
 	MaS INT IDENTITY(1,1),
-<<<<<<< HEAD
-	TenSach nvarchar(100),
-=======
 	TenSach nvarchar(20),
->>>>>>> HoaiThanh
 	GiaSach INT,
 	SLS INT,
 	PRIMARY KEY(MaS)

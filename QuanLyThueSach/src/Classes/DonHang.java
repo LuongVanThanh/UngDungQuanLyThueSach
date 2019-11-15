@@ -167,8 +167,10 @@ public class DonHang {
                 ResultSet rs = stR.executeQuery(sqlGetDL);
                 while(rs.next()){
                     String MaS = rs.getString(2);
-                    String SLS = rs.getString(3);
-                    S.capNhapSach(MaS,SLS);
+                    int SLSC = S.TimSach(MaS).getSLS();
+                    int temp = rs.getInt(3);
+                    int SLS = SLSC + temp;
+                    S.capNhapSach(MaS,String.valueOf(SLS));
                 }
             }
             catch(ClassNotFoundException | SQLException ex){

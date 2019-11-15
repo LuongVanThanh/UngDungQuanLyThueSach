@@ -41,11 +41,11 @@ public class KhachHang {
             return false;
         }   
         for(int i = 0; i < HoTen.length(); i++){
-            if(!Character.isAlphabetic(HoTen.charAt(i)) && HoTen.charAt(i)!= ' '
-                    && HoTen.charAt(i) != '\'')
-                return false;
+            if(Character.isAlphabetic(HoTen.charAt(i)) || HoTen.charAt(i) == ' '
+                    || HoTen.charAt(i) == '\'')
+                return true;
         }
-        return true;
+        return false;
     }
     private boolean KTsdt(String sdt){
         if(sdt.length() == 10 && sdt.charAt(0) == '0'){
@@ -126,7 +126,6 @@ public class KhachHang {
         if(KTMaKH(MaKH)){
             String sqlSelect = "SELECT * FROM KhachHang Where MaKH = N'"+
                     MaKH+"';";
-            System.err.println(sqlSelect);
             conn = ConnectionData.ConnectionTest();
             
             try{
@@ -146,27 +145,5 @@ public class KhachHang {
             }
         }
         return null;
-    }
-    public boolean CapNhapTHKH(String MaKH, String HoTen, String sdt) throws ClassNotFoundException{
-        if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
-            if(TimKH(MaKH)!= null){
-                conn = ConnectionData.ConnectionTest();
-                if(conn != null){
-                    try {
-                        st = conn.createStatement();
-                        String sqlUpdate = "UPDATE KhachHang SET HoTen =N'"+HoTen
-                                +"', sdt =N'"+sdt+"' WHERE MaKH= N'" +MaKH+"';";
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    public static void main(String[] args) throws ClassNotFoundException {
-        KhachHang kh = new KhachHang();
-        System.err.println(kh.TimKH("123456789"));
     }
 }
