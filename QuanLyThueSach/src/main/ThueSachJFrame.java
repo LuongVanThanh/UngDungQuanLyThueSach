@@ -1,11 +1,23 @@
 package main;
 
+import Classes.ConnectionData;
 import Classes.DonHang;
 import Classes.KhachHang;
 import Classes.Sach;
 import java.awt.Toolkit;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -348,6 +360,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             }
         }
     }
+    
     //thêm từng cuốn sách vào bảng và add vào đối tượng dh(đơn hàng)
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
         try {
@@ -385,6 +398,68 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbtThemMouseClicked
 
+    private void xuatPhieu(String maKH){
+        File file = new File("PhieuThueSach.txt");
+        file.delete();
+        int maDH = 0;
+        String tenKH = "";
+        KhachHang kh = new KhachHang();
+        try{
+            //lấy tên khách hàng
+            kh.TimKH(maKH);
+            tenKH = kh.getHoTen();
+            
+            Connection conn = ConnectionData.ConnectionTest();
+            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DonHang] WHERE MaKH = " + maKH);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //lấy mã đơn hàng
+                DonHang dh = new DonHang();
+                if(dh.KTTinhTrang(maKH) == false)
+                    maDH = rs.getInt("MaDH");
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        //Viết vào file txt
+        try {
+            Writer b = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("PhieuThueSach.txt"), "UTF8"));
+            b.write("\t\tTÊN CỬA HÀNG THUÊ SÁCH\r\n\r\n");
+            b.write("\t      590 CMT8, P.11, Q.3, TPHCM\r\n");
+            b.write("\t\t    SĐT: 01212692802\r\n\r\n");
+            b.write("\t\t  --Phiếu Thuê sách-- " + "\r\n");
+            b.write("Thời gian: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            b.write("     Số HD: " + String.valueOf(maDH) + "\r\n\r\n");
+            b.write("Khách hàng: " + tenKH + "\r\n");
+            b.write("----------------------------------------------------\r\n");
+            b.write(" TT  Tên Sách\t\tSố lượng   Đơn giá(VNĐ)\r\n");
+            b.write("----------------------------------------------------\r\n");
+            int line = jtbSach.getRowCount();
+            for (int i = 0; i < line; i++) {
+                String s1 = String.valueOf(i+1);
+                String s2 = jtbSach.getValueAt(i, 1).toString();
+                String s3 = jtbSach.getValueAt(i, 2).toString();
+                String s4 = jtbSach.getValueAt(i, 3).toString();
+                b.write(" " + s1 + "  " + s2 + "\t\t\t" + s3 + "   " + s4 + "\r\n");
+            }
+            b.write("----------------------------------------------------\r\n");
+            b.write("Thành tiền: " + jlbTongTien.getText());
+            b.write("----------------------------------------------------\r\n");
+            b.write("Hạn trả: " + jlbNgayTra.getText() + "\r\n");
+            b.write("----------------------------------------------------\r\n");
+            b.write("Lưu ý:nếu trả trễ mỗi ngày sẽ tính tiền phạt 5.000vnđ\r\n");
+            b.close();
+        } catch (IOException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        //Mở file txt
+        Runtime run = Runtime.getRuntime();
+        try {
+            run.exec("notepad PhieuThueSach.txt");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     private void jbtXuatPhieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtXuatPhieuMouseClicked
         //thêm dữ liệu vào sql
         if(jtbSach.getRowCount() == 0)
@@ -392,8 +467,11 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         else{
             try {
                 themSachVaoDH();
-                if(dh.ThemDonHang(jtfMaKH.getText()) == true)
+                if(dh.ThemDonHang(jtfMaKH.getText()) == true){
+                    xuatPhieu(jtfMaKH.getText());
                     init();
+                }
+                    
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ThueSachJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
