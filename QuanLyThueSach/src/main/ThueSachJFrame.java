@@ -274,7 +274,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     DonHang dh = new DonHang();
-    float t = 0;
+    int t = 0;
     String[] arr = {"Mã sách", "Tên sách", "Số lượng thuê", "Giá"};
     DefaultTableModel model;
     
@@ -337,7 +337,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                 if ("".equals(jlbNgayTra.getText())) //xuất ngày trả và format dd-MM-yyyy
                     jlbNgayTra.setText(LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
                 t += s.getGia() * sLM;
-                jlbTongTien.setText(String.format("%,.2f VNĐ", t));
+                jlbTongTien.setText(String.format("%,d VNĐ", t));
             } else {
                 JOptionPane.showMessageDialog(null, "Số lượng sách không đủ!!!", "Error", JOptionPane.ERROR_MESSAGE);
                 jtfSoLuong.requestFocus();
@@ -443,7 +443,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                 b.write(" " + s1 + "  " + s2 + "\t\t\t" + s3 + "   " + s4 + "\r\n");
             }
             b.write("----------------------------------------------------\r\n");
-            b.write("Thành tiền: " + jlbTongTien.getText());
+            b.write(String.format("Thành tiền: %,d VNĐ", t));
             b.write("----------------------------------------------------\r\n");
             b.write("Hạn trả: " + jlbNgayTra.getText() + "\r\n");
             b.write("----------------------------------------------------\r\n");
