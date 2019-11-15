@@ -300,9 +300,6 @@ public class TraSachJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void traSach(String maKH){
-        
-    }
     
     private void loadDaTaDH(){
         try{

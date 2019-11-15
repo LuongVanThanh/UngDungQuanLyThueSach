@@ -279,7 +279,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
         if(jtbSach.getSelectedRow() == -1){
             try {
-                String tenS = jtfTenSach.getText();
+                String tenS = jtfTenSach.getText().trim();
                 String giaS = jtfGiaChoThue.getText();
                 String soLuongS = jtfSoLuong.getText();
                 if ("".equals(tenS)) {
