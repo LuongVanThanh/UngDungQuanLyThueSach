@@ -76,6 +76,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
 
         jbtThemKH.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtThemKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconThem.png"))); // NOI18N
+        jbtThemKH.setToolTipText("thêm");
         jbtThemKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtThemKHMouseClicked(evt);
@@ -84,6 +85,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
 
         jbtCapNhatKH.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtCapNhatKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconCapNhat.png"))); // NOI18N
+        jbtCapNhatKH.setToolTipText("cập nhật");
         jbtCapNhatKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtCapNhatKHMouseClicked(evt);
@@ -137,6 +139,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
 
         jbtReset.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconReset.png"))); // NOI18N
+        jbtReset.setToolTipText("reset");
         jbtReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtResetMouseClicked(evt);

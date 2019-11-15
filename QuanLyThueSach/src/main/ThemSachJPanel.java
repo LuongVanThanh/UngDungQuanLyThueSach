@@ -262,7 +262,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
             String[] arr = {"Mã sách", "Tên sách", "Giá cho thuê", "Số lượng"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
             Connection conn = ConnectionData.ConnectionTest();
-            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[Sach]");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.[Sach]");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Vector v = new Vector();

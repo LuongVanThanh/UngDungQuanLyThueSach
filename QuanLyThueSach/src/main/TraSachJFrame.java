@@ -332,7 +332,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             String[] arr = {"Mã DH", "Mã KH", "Ngày mượn", "Ngày trả", "Thành tiền", "Tiền phạt", "Trạng thái"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
             Connection conn = ConnectionData.ConnectionTest();
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.[DonHang] WHERE MaKH = " + maKH);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.[DonHang] WHERE MaKH = " + "'" + maKH + "'");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Vector v = new Vector();
@@ -357,7 +357,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             String[] arr = {"Mã DH", "Mã Sách", "Số lượng mượn"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
             Connection conn = ConnectionData.ConnectionTest();
-            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DH_SACH] WHERE MaDH = " + maDH);
+            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DH_SACH] WHERE MaDH = " + "'" + maDH + "'");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Vector v = new Vector();
