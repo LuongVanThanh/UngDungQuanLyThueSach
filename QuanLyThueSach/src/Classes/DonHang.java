@@ -32,6 +32,7 @@ public class DonHang {
     private Statement stR = null;
     
     private ArrayList<DH_Sach> arrDH_Sach = new ArrayList<>();
+    private Sach S = new Sach();
     
     //Kiem tra kieu du lieu
     private boolean KTMaKH(String MaKH) throws ClassNotFoundException{
@@ -156,6 +157,26 @@ public class DonHang {
         }
         return 0;
     }
+    private boolean CapNhapSoSach(String maDH) throws ClassNotFoundException{
+        this.conn = ConnectionData.ConnectionTest();
+        if(conn != null){
+            try{
+                Statement st = conn.createStatement();
+                String sqlGetDL = "Select * From DH_Sach Where MaDH = '"+maDH
+                        + "';";
+                ResultSet rs = stR.executeQuery(sqlGetDL);
+                while(rs.next()){
+                    String MaS = rs.getString(2);
+                    String SLS = rs.getString(3);
+                    S.capNhapSach(MaS,SLS);
+                }
+            }
+            catch(ClassNotFoundException | SQLException ex){
+                return false;
+            }
+        }
+        return true;
+    }
     public boolean TraSach(String MaKH) throws ClassNotFoundException{
         if(KTMaKH(MaKH) && KTTinhTrang(MaKH) != true){
             this.conn = ConnectionData.ConnectionTest();
@@ -182,9 +203,11 @@ public class DonHang {
                             +this.NgayTra+"', TienPhat = "+this.TienPhat 
                             +" WHERE MaDH = "+this.MaDH+";";
                     stI.executeUpdate(sqlUpdate);
+                    boolean temp = CapNhapSoSach(String.valueOf(this.MaDH));
+                    if(temp == false)
+                        return false;
                     return true;
                 }catch(SQLException ex){
-                    System.err.println(ex.toString());
                     return false;
                 }
             }

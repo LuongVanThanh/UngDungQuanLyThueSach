@@ -231,9 +231,14 @@ public class ThemSachJPanel extends javax.swing.JPanel {
     
     //lấy mã sách tự động
     private void loadMaS(){
+        int maS;
         TableModel model = jtbSach.getModel();
-        int i = model.getRowCount() - 1;
-        int maS = Integer.parseInt(model.getValueAt(i, 0).toString());
+        if(model.getRowCount() == 0)
+            maS = 0;
+        else{
+            int i = model.getRowCount() - 1;
+            maS = Integer.parseInt(model.getValueAt(i, 0).toString());
+        }
         jtfMaSach.setText(String.valueOf(maS+1));
     }
     //trở về mặc định lúc thêm

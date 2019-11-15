@@ -169,7 +169,7 @@ public class TestCapNhapSach {
     //Test case(MaS = 1, SLS = '0')
     public void TestCapNhapSachCase20() throws ClassNotFoundException{
         boolean actual = s.capNhapSach("1", "0");
-        boolean expected = false;
+        boolean expected = true;
         Assert.assertEquals(expected, actual);
     }
     @Test

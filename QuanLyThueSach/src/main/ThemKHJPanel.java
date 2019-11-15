@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -88,6 +90,11 @@ public class ThemKHJPanel extends javax.swing.JPanel {
             }
         });
 
+        jtbKH = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jtbKH.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jtbKH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,9 +148,9 @@ public class ThemKHJPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -154,7 +161,6 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                             .addComponent(jtfSDT)
                             .addComponent(jtfMaKH)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jbtReset, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(jbtCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,7 +235,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Vector v = new Vector();
-                v.add(rs.getInt("MaKH"));
+                v.add(rs.getString("MaKH"));
                 v.add(rs.getString("HoTen"));
                 v.add(rs.getString("SDT"));
                 model.addRow(v);
@@ -259,6 +265,13 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                     KhachHang s = new KhachHang();
                     if (s.ThemKH(maKH, hoTen, soDT) == true) {
                         init();
+                        int res = JOptionPane.showConfirmDialog(null, "Bạn có muốn chuyển sang form thuê sách???", "Thông báo", JOptionPane.YES_NO_OPTION);
+                        if(res == JOptionPane.YES_OPTION){
+                            ThueSachJFrame tsj = new ThueSachJFrame(maKH);
+                        // lấy jframe đang chứa nó ẩn đi
+                        this.getTopLevelAncestor().setVisible(false);
+                        tsj.setVisible(true);
+                        }
                     } else {
                         throw new Exception("Dữ liệu không hợp lệ!");
                     }

@@ -27,10 +27,8 @@ public class KhachHang {
     private boolean KTMaKH(String MaKH){
         if((MaKH.length() == 9) || (MaKH.length() == 12)){
             try {
-                for(int i = 0; i < MaKH.length(); i++){
-                    if(!Character.isDigit(MaKH.charAt(i)))
-                        return false;
-                }
+                if(Long.parseLong(MaKH) > 0)
+                    return true;
             }
             catch (NumberFormatException ex){
                 return false;
@@ -52,10 +50,8 @@ public class KhachHang {
     private boolean KTsdt(String sdt){
         if(sdt.length() == 10 && sdt.charAt(0) == '0'){
            try{
-               for(int i = 0; i < sdt.length(); i++){
-                   if(Character.isDigit(sdt.charAt(i)))
-                       return false;
-               }
+               if(Long.parseLong(sdt) > 0)
+                return true;
            }
            catch(NumberFormatException ex){
                return false;
@@ -116,7 +112,6 @@ public class KhachHang {
                     String sqlUpdate = "UPDATE KhachHang set MaKH = '"+this.MaKH+
                             "', HoTen = N'"+this.HoTen+"', SDT = "+this.SDT+
                             " WHERE MaKH = "+this.MaKH+";";
-                    System.out.println(sqlUpdate);
                     st.executeUpdate(sqlUpdate);
                     return true;
                 } catch (SQLException e) {
