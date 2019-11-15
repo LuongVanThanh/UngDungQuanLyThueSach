@@ -426,10 +426,10 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             Writer b = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("PhieuThueSach.txt"), "UTF8"));
             b.write("\t\tTÊN CỬA HÀNG THUÊ SÁCH\r\n\r\n");
             b.write("\t      590 CMT8, P.11, Q.3, TPHCM\r\n");
-            b.write("\t\t    SĐT: 01212692802\r\n\r\n");
-            b.write("\t\t  --Phiếu Thuê sách-- " + "\r\n");
+            b.write("\t\t   SĐT: 01212692802\r\n\r\n");
+            b.write("\t\t --Phiếu Thuê sách-- " + "\r\n\r\n");
             b.write("Thời gian: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-            b.write("     Số HD: " + String.valueOf(maDH) + "\r\n\r\n");
+            b.write("\t\tSố HD: " + String.valueOf(maDH) + "\r\n");
             b.write("Khách hàng: " + tenKH + "\r\n");
             b.write("----------------------------------------------------\r\n");
             b.write(" TT  Tên Sách\t\tSố lượng   Đơn giá(VNĐ)\r\n");
@@ -438,12 +438,18 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             for (int i = 0; i < line; i++) {
                 String s1 = String.valueOf(i+1);
                 String s2 = jtbSach.getValueAt(i, 1).toString();
+                //xu ly chuoi s2
+                int l = s2.length();
+                String temp = " ";
+                if(l < 30)
+                    for(int j = 1; j <= (20 - l); j++)
+                        s2 = s2.concat(temp);
                 String s3 = jtbSach.getValueAt(i, 2).toString();
                 String s4 = jtbSach.getValueAt(i, 3).toString();
-                b.write(" " + s1 + "  " + s2 + "\t\t\t" + s3 + "   " + s4 + "\r\n");
+                b.write(" " + s1 + "   " + s2 + " " + s3 + "\t\t" + s4 + "\r\n");
             }
             b.write("----------------------------------------------------\r\n");
-            b.write(String.format("Thành tiền: %,d VNĐ", t));
+            b.write(String.format("Thành tiền: %,d VNĐ", t)+ "\r\n");
             b.write("----------------------------------------------------\r\n");
             b.write("Hạn trả: " + jlbNgayTra.getText() + "\r\n");
             b.write("----------------------------------------------------\r\n");
