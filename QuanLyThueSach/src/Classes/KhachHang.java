@@ -110,8 +110,8 @@ public class KhachHang {
                     st = conn.createStatement();
                     //Update
                     String sqlUpdate = "UPDATE KhachHang set MaKH = '"+this.MaKH+
-                            "', HoTen = N'"+this.HoTen+"', SDT = "+this.SDT+
-                            " WHERE MaKH = '"+this.MaKH+"';";
+                            "', HoTen = N'"+this.HoTen+"', SDT = '"+this.SDT+
+                            "' WHERE MaKH = '"+this.MaKH+"';";
                     st.executeUpdate(sqlUpdate);
                     return true;
                 } catch (SQLException e) {
@@ -164,9 +164,5 @@ public class KhachHang {
         }
         return false;
     }
-    
-    public static void main(String[] args) throws ClassNotFoundException {
-        KhachHang kh = new KhachHang();
-        System.err.println(kh.TimKH("777777777"));
-    }
+
 }
