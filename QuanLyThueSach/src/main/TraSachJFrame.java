@@ -483,6 +483,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                         dh.TraSach(maKH);
                         xuatPhieuTienPhat(i);
                         loadDaTaDH();
+                        jbtTraSach.setForeground(Color.black);
                     }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
