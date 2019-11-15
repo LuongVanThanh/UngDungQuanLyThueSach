@@ -437,7 +437,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             tenKH = kh.getHoTen();
             
             Connection conn = ConnectionData.ConnectionTest();
-            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DonHang] WHERE MaKH = " + maKH);
+            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DonHang] WHERE MaKH = '" + maKH + "'");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 //lấy mã đơn hàng
