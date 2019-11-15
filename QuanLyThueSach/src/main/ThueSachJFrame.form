@@ -275,7 +275,6 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/image/IconThem.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="  Th&#xea;m"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbtThemMouseClicked"/>
@@ -334,7 +333,6 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/image/IconReset.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Reset"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbtResetMouseClicked"/>

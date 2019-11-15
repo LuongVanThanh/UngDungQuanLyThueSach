@@ -185,7 +185,6 @@ public class ThueSachJFrame extends javax.swing.JFrame {
 
         jbtThem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconThem.png"))); // NOI18N
-        jbtThem.setText("  Thêm");
         jbtThem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtThemMouseClicked(evt);
@@ -209,7 +208,6 @@ public class ThueSachJFrame extends javax.swing.JFrame {
 
         jbtReset.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconReset.png"))); // NOI18N
-        jbtReset.setText("Reset");
         jbtReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtResetMouseClicked(evt);

@@ -109,8 +109,8 @@ public class KhachHang {
                     this.SDT = sdt;
                     st = conn.createStatement();
                     //Update
-                    String sqlUpdate = "UPDATE KhachHang set MaKH = '"+this.MaKH+
-                            "', HoTen = N'"+this.HoTen+"', SDT = "+this.SDT+
+                    String sqlUpdate = "UPDATE KhachHang set MaKH = "+this.MaKH+
+                            ", HoTen = N'"+this.HoTen+"', SDT = "+this.SDT+
                             " WHERE MaKH = "+this.MaKH+";";
                     System.out.println(sqlUpdate);
                     st.executeUpdate(sqlUpdate);

@@ -77,7 +77,8 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         jtfSoLuong.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jbtThem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jbtThem.setText("Thêm");
+        jbtThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconThem.png"))); // NOI18N
+        jbtThem.setToolTipText("thêm");
         jbtThem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtThemMouseClicked(evt);
@@ -90,7 +91,8 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         });
 
         jbtCapNhatS.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jbtCapNhatS.setText("Cập nhật");
+        jbtCapNhatS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconCapNhat.png"))); // NOI18N
+        jbtCapNhatS.setToolTipText("cập nhật");
         jbtCapNhatS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtCapNhatSMouseClicked(evt);
@@ -141,7 +143,8 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         }
 
         jbtReset.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jbtReset.setText("Reset");
+        jbtReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconReset.png"))); // NOI18N
+        jbtReset.setToolTipText("reset");
         jbtReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtResetMouseClicked(evt);
@@ -208,12 +211,12 @@ public class ThemSachJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtfSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtThem)
                     .addComponent(jbtReset)
                     .addComponent(jbtCapNhatS))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -225,7 +228,9 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
