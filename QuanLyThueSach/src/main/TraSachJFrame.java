@@ -6,9 +6,17 @@ import Classes.DonHang;
 import Classes.KhachHang;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,7 +57,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
         jtbTraSach = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jtfMaKH = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbtTimKiem = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtbDHSach = new javax.swing.JTable();
@@ -178,11 +186,11 @@ public class TraSachJFrame extends javax.swing.JFrame {
 
         jtfMaKH.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton1.setText("Tìm kiếm");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbtTimKiem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbtTimKiem.setText("Tìm kiếm");
+        jbtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jbtTimKiemMouseClicked(evt);
             }
         });
 
@@ -252,7 +260,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                         .addComponent(jtfMaKH))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jbtTimKiem)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -262,7 +270,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                     .addComponent(jtfMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jbtTimKiem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jbtTraSach)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -366,6 +374,56 @@ public class TraSachJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    private void xuatPhieuTienPhat(int dhChon){
+        File file = new File("PhieuTienPhat.txt");
+        file.delete();
+        String tenKH = "";
+        String maDH = "";
+        String maKH = "";
+        int tienPhat = 0;
+        int ngayTre = 0;
+        try{
+            maDH = jtbTraSach.getValueAt(dhChon, 0).toString();
+            maKH = jtbTraSach.getValueAt(dhChon, 1).toString();
+            tienPhat = Integer.parseInt(jtbTraSach.getValueAt(dhChon, 5).toString());
+            ngayTre = tienPhat / 5000;
+            KhachHang kh = new KhachHang();
+            kh.TimKH(maKH);
+            tenKH = kh.getHoTen();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        //Viết vào file txt
+        try {
+            Writer b = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("PhieuTienPhat.txt"), "UTF8"));
+            b.write("\t\tTÊN CỬA HÀNG THUÊ SÁCH\r\n\r\n");
+            b.write("\t      590 CMT8, P.11, Q.3, TPHCM\r\n");
+            b.write("\t\t   SĐT: 01212692802\r\n\r\n");
+            b.write("\t\t --Phiếu Tiền Phạt-- " + "\r\n\r\n");
+            b.write("Thời gian: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            b.write("\t\tSố HD: " + maDH + "\r\n");
+            b.write("Khách hàng: " + tenKH );
+            b.write("\t\tMã KH: " + maKH + "\r\n");
+            b.write("----------------------------------------------------\r\n");
+            b.write(" TT  Số ngày trễ\t Tiền phạt(VNĐ)\r\n");
+            b.write("----------------------------------------------------\r\n");
+            b.write(" 1  \t " + ngayTre + "\t\t      " + tienPhat + "\r\n");
+            b.write("----------------------------------------------------\r\n");
+            b.write("Cảm ơn đã thuê sách của chúng tôi\r\n");
+            b.close();
+        } catch (IOException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        //Mở file txt
+        Runtime run = Runtime.getRuntime();
+        try {
+            run.exec("notepad PhieuTienPhat.txt");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     private void jbtVTC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVTC1ActionPerformed
         this.setVisible(false);
         new MainJFrame().setVisible(true);
@@ -383,7 +441,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             jbtTraSach.setForeground(Color.black);
     }//GEN-LAST:event_jtbTraSachMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jbtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtTimKiemMouseClicked
         try{
             String maKH = jtfMaKH.getText();
             KhachHang kh = new KhachHang();
@@ -398,7 +456,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_jbtTimKiemMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int result = JOptionPane.showConfirmDialog(null, "Bạn Có Muốn Thoát Khỏi Chương Trình Hay Không?", "Thông Báo", JOptionPane.OK_CANCEL_OPTION);
@@ -423,6 +481,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                     if (result == JOptionPane.YES_OPTION) {
                         DonHang dh = new DonHang();
                         dh.TraSach(maKH);
+                        xuatPhieuTienPhat(i);
                         loadDaTaDH();
                     }
                 } catch (Exception ex) {
@@ -481,7 +540,6 @@ public class TraSachJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -492,6 +550,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JButton jbtTimKiem;
     private javax.swing.JButton jbtTraSach;
     private javax.swing.JButton jbtVTC1;
     private javax.swing.JTable jtbDHSach;

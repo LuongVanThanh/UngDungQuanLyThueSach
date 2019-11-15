@@ -275,6 +275,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
     
     DonHang dh = new DonHang();
     int t = 0;
+    int soSach = 0;
     String[] arr = {"Mã sách", "Tên sách", "Số lượng thuê", "Giá"};
     DefaultTableModel model;
     
@@ -296,55 +297,64 @@ public class ThueSachJFrame extends javax.swing.JFrame {
     }
     
     //thêm sách vào jtbSach
-    private void themSachVaoTable(String maS, int soLM){
-        try{
-            TableModel model1 = jtbSach.getModel();
-            Sach s = new Sach().TimSach(maS);
-            int sLM = soLM;
-            for (int i = 0; i < model1.getRowCount(); i++) {
-                if (maS.equals(model1.getValueAt(i, 0).toString())) {
-                    int sLDM = Integer.parseInt(model.getValueAt(i, 2).toString());
-                    sLM += sLDM;
-                    if (s.TimSach(maS) != null) {
-                        if(sLM <= s.getSLS()){
-                            model1.setValueAt(sLM, i, 2);
-                            model1.setValueAt(sLM * s.getGia(), i, 3);
-                            t += s.getGia() * soLM;
-                            jlbTongTien.setText(String.format("%,.2f VNĐ", t));
-                            jtfMaS.setText("");
-                            jtfSoLuong.setText("");
-                            jtfMaS.requestFocus();
-                            return;
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Số lượng sách không đủ!!!", "Error", JOptionPane.ERROR_MESSAGE);
-                            jtfSoLuong.requestFocus();
-                            return;
-                        }   
+    private void themSachVaoTable(String maS, int soLM) {
+        if ((soSach + soLM) <= 5) {
+            try {
+                TableModel model1 = jtbSach.getModel();
+                Sach s = new Sach().TimSach(maS);
+                int sLM = soLM;
+                for (int i = 0; i < model1.getRowCount(); i++) {
+                    if (maS.equals(model1.getValueAt(i, 0).toString())) {
+                        int sLDM = Integer.parseInt(model.getValueAt(i, 2).toString());
+                        sLM += sLDM;
+                        if (s.TimSach(maS) != null) {
+                            if (sLM <= s.getSLS()) {
+                                model1.setValueAt(sLM, i, 2);
+                                model1.setValueAt(sLM * s.getGia(), i, 3);
+                                t += s.getGia() * soLM;
+                                soSach += soLM;
+                                jlbTongTien.setText(String.format("%,d VNĐ", t));
+                                jtfMaS.setText("");
+                                jtfSoLuong.setText("");
+                                jtfMaS.requestFocus();
+                                return;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Số lượng sách không đủ!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                                jtfSoLuong.requestFocus();
+                                return;
+                            }
+                        }
                     }
                 }
+                if (sLM <= s.getSLS()) {
+                    Vector v = new Vector();
+                    v.add(maS);
+                    v.add(s.getTenSach());
+                    v.add(soLM);
+                    v.add(s.getGia() * soLM);
+                    model.addRow(v);
+                    jtbSach.setModel(model);
+                    soSach += soLM;
+                    jtfMaS.setText("");
+                    jtfSoLuong.setText("");
+                    jtfMaS.requestFocus();
+                    if ("".equals(jlbNgayTra.getText())) //xuất ngày trả và format dd-MM-yyyy
+                    {
+                        jlbNgayTra.setText(LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
+                    }
+                    t += s.getGia() * sLM;
+                    jlbTongTien.setText(String.format("%,d VNĐ", t));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Số lượng sách không đủ!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfSoLuong.requestFocus();
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            if(sLM <= s.getSLS()){
-                Vector v = new Vector();
-                v.add(maS);
-                v.add(s.getTenSach());
-                v.add(soLM);
-                v.add(s.getGia() * soLM);
-                model.addRow(v);
-                jtbSach.setModel(model);
-                jtfMaS.setText("");
-                jtfSoLuong.setText("");
-                jtfMaS.requestFocus();
-                if ("".equals(jlbNgayTra.getText())) //xuất ngày trả và format dd-MM-yyyy
-                    jlbNgayTra.setText(LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
-                t += s.getGia() * sLM;
-                jlbTongTien.setText(String.format("%,d VNĐ", t));
-            } else {
-                JOptionPane.showMessageDialog(null, "Số lượng sách không đủ!!!", "Error", JOptionPane.ERROR_MESSAGE);
-                jtfSoLuong.requestFocus();
-            }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chỉ được mượn 5 cuốn một lần!!!", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
+
     }
 
     //thêm sách từ jtbSach vào cho đối tượng dh
@@ -366,7 +376,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         try {
             
             String maKH = jtfMaKH.getText();
-            String maS = jtfMaS.getText();
+            int maS = Integer.parseInt(jtfMaS.getText());
             int soLM = Integer.parseInt(jtfSoLuong.getText());
             KhachHang kh = new KhachHang();
             Sach s = new Sach();
@@ -382,7 +392,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             } else if (kh.TimKH(maKH) == null) {
                 JOptionPane.showMessageDialog(null, "Dữ liệu mã khách hàng không đúng!!!", "Error", JOptionPane.ERROR_MESSAGE);
                 jtfMaKH.requestFocus();
-            } else if(s.TimSach(maS) == null){
+            } else if(s.TimSach(String.valueOf(maS)) == null){
                 JOptionPane.showMessageDialog(null, "Dữ liệu mã sách không đúng!!!", "Error", JOptionPane.ERROR_MESSAGE);
                 jtfMaS.requestFocus();
             } else if(soLM <= 0){
@@ -390,7 +400,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                 jtfSoLuong.requestFocus();
             } else{
                 jtfMaKH.setEnabled(false);
-                themSachVaoTable(maS, soLM);
+                themSachVaoTable(String.valueOf(maS), soLM);
             }
         }catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Dữ liệu số lượng hơp lệ!!!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -430,7 +440,8 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             b.write("\t\t --Phiếu Thuê sách-- " + "\r\n\r\n");
             b.write("Thời gian: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
             b.write("\t\tSố HD: " + String.valueOf(maDH) + "\r\n");
-            b.write("Khách hàng: " + tenKH + "\r\n");
+            b.write("Khách hàng: " + tenKH );
+            b.write("\t\tMã KH: " + maKH + "\r\n");
             b.write("----------------------------------------------------\r\n");
             b.write(" TT  Tên Sách\t\tSố lượng   Đơn giá(VNĐ)\r\n");
             b.write("----------------------------------------------------\r\n");
@@ -454,6 +465,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             b.write("Hạn trả: " + jlbNgayTra.getText() + "\r\n");
             b.write("----------------------------------------------------\r\n");
             b.write("Lưu ý:nếu trả trễ mỗi ngày sẽ tính tiền phạt 5.000vnđ\r\n");
+            b.write("-------Khi trả sách nhớ đem theo phiếu thuê sách\r\n");
             b.close();
         } catch (IOException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, e);
