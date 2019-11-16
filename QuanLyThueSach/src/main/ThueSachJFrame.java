@@ -357,7 +357,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                     jtfMaS.requestFocus();
                     if ("".equals(jlbNgayTra.getText())) //xuất ngày trả và format dd-MM-yyyy
                     {
-                        jlbNgayTra.setText(LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
+                        jlbNgayTra.setText(LocalDate.now().plusDays(30).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
                     }
                     t += s.getGia() * sLM;
                     jlbTongTien.setText(String.format("%,d VNĐ", t));
