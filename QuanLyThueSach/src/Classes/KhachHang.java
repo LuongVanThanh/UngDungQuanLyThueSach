@@ -41,11 +41,11 @@ public class KhachHang {
             return false;
         }   
         for(int i = 0; i < HoTen.length(); i++){
-            if(Character.isAlphabetic(HoTen.charAt(i)) || HoTen.charAt(i) == ' '
-                    || HoTen.charAt(i) == '\'')
-                return true;
+            if(!Character.isAlphabetic(HoTen.charAt(i)) && HoTen.charAt(i) != ' '
+                    && HoTen.charAt(i) != '\'')
+                return false;
         }
-        return false;
+        return true;
     }
     private boolean KTsdt(String sdt){
         if(sdt.length() == 10 && sdt.charAt(0) == '0'){
