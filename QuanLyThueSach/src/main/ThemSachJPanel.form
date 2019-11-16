@@ -21,14 +21,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
           <Component id="jPanel1" max="32767" attributes="0"/>
-=======
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
->>>>>>> fd59ddd8163439804cb163bbb2e5182c20f2f2d2
       </Group>
     </DimensionLayout>
   </Layout>
@@ -111,15 +104,11 @@
                       <Component id="jbtReset" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbtCapNhatS" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-<<<<<<< HEAD
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="429" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-=======
-                  <EmptySpace pref="72" max="32767" attributes="0"/>
->>>>>>> fd59ddd8163439804cb163bbb2e5182c20f2f2d2
               </Group>
           </Group>
         </DimensionLayout>
