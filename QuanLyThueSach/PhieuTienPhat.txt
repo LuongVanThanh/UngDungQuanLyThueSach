@@ -1,15 +1,17 @@
 		TÊN CỬA HÀNG THUÊ SÁCH
 
-	      590 CMT8, P.11, Q.3, TPHCM
+	371 Nguyễn Kiệm, P.3, Q.Gò Vấp, TPHCM
 		   SĐT: 01212692802
 
 		 --Phiếu Tiền Phạt-- 
 
-Thời gian: 15.11.2019		Số HD: 1039
-Khách hàng: Hoai Thai		Mã KH: 333333333
+Thời gian: 16.11.2019		Số DH: 1046
+Khách hàng: IThadesaaa		Mã KH: 111111111
 ----------------------------------------------------
  TT  Số ngày trễ	 Tiền phạt(VNĐ)
 ----------------------------------------------------
- 1  	 0		   0
+ 1  	 0		      0
 ----------------------------------------------------
+Thành tiền: 0 VNĐ
+
 Cảm ơn đã thuê sách của chúng tôi

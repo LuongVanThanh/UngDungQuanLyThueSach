@@ -437,7 +437,7 @@ public class ThueSachJFrame extends javax.swing.JFrame {
             tenKH = kh.getHoTen();
             
             Connection conn = ConnectionData.ConnectionTest();
-            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DonHang] WHERE MaKH = " + maKH);
+            PreparedStatement ps = conn.prepareStatement("SELECT* FROM dbo.[DonHang] WHERE MaKH = '" + maKH + "'");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 //lấy mã đơn hàng
@@ -452,11 +452,11 @@ public class ThueSachJFrame extends javax.swing.JFrame {
         try {
             Writer b = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("PhieuThueSach.txt"), "UTF8"));
             b.write("\t\tTÊN CỬA HÀNG THUÊ SÁCH\r\n\r\n");
-            b.write("\t      590 CMT8, P.11, Q.3, TPHCM\r\n");
+            b.write("\t371 Nguyễn Kiệm, P.3, Q.Gò Vấp, TPHCM\r\n");
             b.write("\t\t   SĐT: 01212692802\r\n\r\n");
             b.write("\t\t --Phiếu Thuê sách-- " + "\r\n\r\n");
             b.write("Thời gian: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-            b.write("\t\tSố HD: " + String.valueOf(maDH) + "\r\n");
+            b.write("\t\tSố DH: " + String.valueOf(maDH) + "\r\n");
             b.write("Khách hàng: " + tenKH );
             b.write("\t\tMã KH: " + maKH + "\r\n");
             b.write("----------------------------------------------------\r\n");
@@ -505,7 +505,8 @@ public class ThueSachJFrame extends javax.swing.JFrame {
                 if(dh.ThemDonHang(jtfMaKH.getText()) == true){
                     xuatPhieu(jtfMaKH.getText());
                     init();
-                }
+                } else
+                    JOptionPane.showMessageDialog(null, "Khách hàng chưa trả sách đã thuê trước đó!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ThueSachJFrame.class.getName()).log(Level.SEVERE, null, ex);

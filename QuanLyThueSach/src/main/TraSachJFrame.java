@@ -285,7 +285,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,11 +395,11 @@ public class TraSachJFrame extends javax.swing.JFrame {
         try {
             Writer b = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("PhieuTienPhat.txt"), "UTF8"));
             b.write("\t\tTÊN CỬA HÀNG THUÊ SÁCH\r\n\r\n");
-            b.write("\t      590 CMT8, P.11, Q.3, TPHCM\r\n");
+            b.write("\t371 Nguyễn Kiệm, P.3, Q.Gò Vấp, TPHCM\r\n");
             b.write("\t\t   SĐT: 01212692802\r\n\r\n");
             b.write("\t\t --Phiếu Tiền Phạt-- " + "\r\n\r\n");
             b.write("Thời gian: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-            b.write("\t\tSố HD: " + maDH + "\r\n");
+            b.write("\t\tSố DH: " + maDH + "\r\n");
             b.write("Khách hàng: " + tenKH );
             b.write("\t\tMã KH: " + maKH + "\r\n");
             b.write("----------------------------------------------------\r\n");
@@ -407,6 +407,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             b.write("----------------------------------------------------\r\n");
             b.write(" 1  \t " + ngayTre + "\t\t      " + tienPhat + "\r\n");
             b.write("----------------------------------------------------\r\n");
+            b.write(String.format("Thành tiền: %,d VNĐ\r\n\r\n", tienPhat));
             b.write("Cảm ơn đã thuê sách của chúng tôi\r\n");
             b.close();
         } catch (IOException | NumberFormatException e) {
@@ -478,8 +479,8 @@ public class TraSachJFrame extends javax.swing.JFrame {
                     if (result == JOptionPane.YES_OPTION) {
                         DonHang dh = new DonHang();
                         dh.TraSach(maKH);
-                        xuatPhieuTienPhat(i);
                         loadDaTaDH();
+                        xuatPhieuTienPhat(i);
                         jbtTraSach.setForeground(Color.black);
                     }
                 } catch (Exception ex) {
