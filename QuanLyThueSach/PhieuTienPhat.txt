@@ -5,13 +5,8 @@
 
 		 --Phiếu Tiền Phạt-- 
 
-<<<<<<< HEAD
-Thời gian: 16.11.2019		Số DH: 1046
-Khách hàng: IThadesaaa		Mã KH: 111111111
-=======
-Thời gian: 15.11.2019		Số HD: 10
-Khách hàng: Tuấn iohaskjdhkjaHL		Mã KH: 312450145123
->>>>>>> 0efc474f2a801b405a87c94b028f2577c413b7c3
+Thời gian: 16.11.2019		Số DH: 1048
+Khách hàng: fdsafda		Mã KH: 555555555
 ----------------------------------------------------
  TT  Số ngày trễ	 Tiền phạt(VNĐ)
 ----------------------------------------------------

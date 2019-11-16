@@ -110,8 +110,9 @@ public class KhachHang {
                     st = conn.createStatement();
                     //Update
                     String sqlUpdate = "UPDATE KhachHang set MaKH = '"+this.MaKH+
-                            "', HoTen = N'"+this.HoTen+"', SDT = '"+this.SDT+
-                            "' WHERE MaKH = '"+this.MaKH+"';";
+                            "', HoTen = N'"+this.HoTen+"', SDT = "+this.SDT+
+                            " WHERE MaKH = "+this.MaKH+";";
+                    System.out.println(sqlUpdate);
                     st.executeUpdate(sqlUpdate);
                     return true;
                 } catch (SQLException e) {
@@ -164,5 +165,4 @@ public class KhachHang {
         }
         return false;
     }
-
 }
