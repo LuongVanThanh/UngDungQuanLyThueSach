@@ -54,6 +54,17 @@ public class Sach {
         }
         return false;
     }
+    private boolean KTSLSBang0(String g){
+        if(g != ""){
+            try {
+                if(Integer.parseInt(g) >= 0)
+                    return true;
+            } catch (NumberFormatException e) {
+                 return false;
+            }
+        }
+        return false;
+    }
     private boolean KTMaS(String MaS){
         if(MaS != ""){
             try {
@@ -134,7 +145,7 @@ public class Sach {
     }
 
     public boolean capNhapSach(String MaS, String SLS) throws ClassNotFoundException{
-        if(KTMaS(MaS) && KTSLS(SLS)){
+        if(KTMaS(MaS) && KTSLSBang0(SLS)){
             //Gan gia tri
             this.MaS = Integer.parseInt(MaS);
             this.SLS = Integer.parseInt(SLS);

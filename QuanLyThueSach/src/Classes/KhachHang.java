@@ -41,11 +41,11 @@ public class KhachHang {
             return false;
         }   
         for(int i = 0; i < HoTen.length(); i++){
-            if(!Character.isAlphabetic(HoTen.charAt(i)) && HoTen.charAt(i)!= ' '
-                    && HoTen.charAt(i) != '\'')
-                return false;
+            if(Character.isAlphabetic(HoTen.charAt(i)) || HoTen.charAt(i) == ' '
+                    || HoTen.charAt(i) == '\'')
+                return true;
         }
-        return true;
+        return false;
     }
     private boolean KTsdt(String sdt){
         if(sdt.length() == 10 && sdt.charAt(0) == '0'){
@@ -110,9 +110,8 @@ public class KhachHang {
                     st = conn.createStatement();
                     //Update
                     String sqlUpdate = "UPDATE KhachHang set MaKH = '"+this.MaKH+
-                            "', HoTen = N'"+this.HoTen+"', SDT = "+this.SDT+
-                            " WHERE MaKH = "+this.MaKH+";";
-                    System.out.println(sqlUpdate);
+                            "', HoTen = N'"+this.HoTen+"', SDT = '"+this.SDT+
+                            "' WHERE MaKH = '"+this.MaKH+"';";
                     st.executeUpdate(sqlUpdate);
                     return true;
                 } catch (SQLException e) {
@@ -146,23 +145,5 @@ public class KhachHang {
             }
         }
         return null;
-    }
-    public boolean CapNhapTHKH(String MaKH, String HoTen, String sdt) throws ClassNotFoundException{
-        if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
-            if(TimKH(MaKH)!= null){
-                conn = ConnectionData.ConnectionTest();
-                if(conn != null){
-                    try {
-                        st = conn.createStatement();
-                        String sqlUpdate = "UPDATE KhachHang SET HoTen =N'"+HoTen
-                                +"', sdt =N'"+sdt+"' WHERE MaKH= N'" +MaKH+"';";
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return false;
     }
 }
