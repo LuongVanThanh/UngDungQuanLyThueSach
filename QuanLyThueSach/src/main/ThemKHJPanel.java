@@ -308,7 +308,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
     private void jbtCapNhatKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtCapNhatKHMouseClicked
         try {
                 String maKH = jtfMaKH.getText();
-                String hoTen = jtfHoTen.getText();
+                String hoTen = jtfHoTen.getText().trim();
                 String soDT = jtfSDT.getText();
                 if ("".equals(maKH)) {
                     JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã khách hàng!!!", "Error", JOptionPane.ERROR_MESSAGE);

@@ -84,11 +84,6 @@ public class ThemSachJPanel extends javax.swing.JPanel {
                 jbtThemMouseClicked(evt);
             }
         });
-        jbtThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtThemActionPerformed(evt);
-            }
-        });
 
         jbtCapNhatS.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbtCapNhatS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/IconCapNhat.png"))); // NOI18N
@@ -148,11 +143,6 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         jbtReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtResetMouseClicked(evt);
-            }
-        });
-        jbtReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtResetActionPerformed(evt);
             }
         });
 
@@ -277,10 +267,6 @@ public class ThemSachJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    private void jbtThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtThemActionPerformed
-
-    }//GEN-LAST:event_jbtThemActionPerformed
-
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
         if(jtbSach.getSelectedRow() == -1){
             try {
@@ -323,10 +309,6 @@ public class ThemSachJPanel extends javax.swing.JPanel {
         jtfSoLuong.setText(model.getValueAt(i, 3).toString());
     }//GEN-LAST:event_jtbSachMouseClicked
 
-    private void jbtResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtResetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtResetActionPerformed
-
     private void jbtResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtResetMouseClicked
         init();
     }//GEN-LAST:event_jbtResetMouseClicked
@@ -334,7 +316,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
     private void jbtCapNhatSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtCapNhatSMouseClicked
         try {
             String maS = jtfMaSach.getText();
-            String tenS = jtfTenSach.getText();
+            String tenS = jtfTenSach.getText().trim();
             String giaS = jtfGiaChoThue.getText();
             String soLuongS = jtfSoLuong.getText();
             if ("".equals(tenS)) {
