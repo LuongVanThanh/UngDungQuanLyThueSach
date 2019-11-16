@@ -75,7 +75,11 @@
           <Group type="102" attributes="0">
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
               <Component id="jScrollPane1" min="-2" pref="880" max="-2" attributes="0"/>
+=======
+              <Component id="jScrollPane1" pref="1006" max="32767" attributes="0"/>
+>>>>>>> fd59ddd8163439804cb163bbb2e5182c20f2f2d2
           </Group>
       </Group>
     </DimensionLayout>
