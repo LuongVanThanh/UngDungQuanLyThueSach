@@ -42,7 +42,7 @@ public class KhachHang {
         }   
         for(int i = 0; i < HoTen.length(); i++){
             if(!Character.isAlphabetic(HoTen.charAt(i)) && HoTen.charAt(i) != ' '
-                    && HoTen.charAt(i) != '\'')
+                    && (int)HoTen.charAt(i) != 39)
                 return false;
         }
         return true;
@@ -73,6 +73,7 @@ public class KhachHang {
     
     //them thong tin khach hang
     public boolean ThemKH(String MaKH, String HoTen, String sdt) throws ClassNotFoundException{
+        HoTen = HoTen.replace("'", "''");
         if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
             //Gan gia tri;
             this.MaKH = MaKH;
@@ -98,6 +99,7 @@ public class KhachHang {
     }
     public boolean capNhapKH(String MaKH, String HoTen, String sdt) 
             throws ClassNotFoundException{
+        HoTen = HoTen.replace("'", "''");
         if(KTMaKH(MaKH) && KTHoTen(HoTen) && KTsdt(sdt)){
             //Cap nhap csdl
             conn = ConnectionData.ConnectionTest();
