@@ -18,6 +18,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
@@ -31,7 +32,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
      */
     public ThemKHJPanel() {
         initComponents();
-        showData();
+        init();
     }
 
     /**
@@ -232,8 +233,28 @@ public class ThemKHJPanel extends javax.swing.JPanel {
         jtfHoTen.setText("");
         jtfSDT.setText("");
         jtfMaKH.requestFocus();
-        showData();
+        showData();     
     }
+    
+    public static String chuanHoaChuoi(String chuoi){
+        try{
+            String s = chuoi.trim();
+            s = s.replaceAll("\\s+", " ");
+            s = s.toLowerCase();
+            s = s.substring(0, 1).toUpperCase() + s.substring(1, s.length());
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == ' ') {
+                    s = s.substring(0, i+1) + s.substring(i + 1, i + 2).toUpperCase()
+                            + s.substring(i + 2, s.length());
+                }
+            }
+            return s;
+        } catch(Exception ex){
+            return ex.getMessage();
+        }
+        
+    }
+    
     private void showData(){
         try{
             jtbKH.removeAll();
@@ -271,6 +292,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Bạn chưa nhập số điện thoại!!!", "Error", JOptionPane.ERROR_MESSAGE);
                     jtfSDT.requestFocus();
                 } else {
+                    hoTen = chuanHoaChuoi(hoTen);
                     KhachHang s = new KhachHang();
                     if (s.ThemKH(maKH, hoTen, soDT) == true) {
                         init();
@@ -320,6 +342,7 @@ public class ThemKHJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Bạn chưa nhập số điện thoại!!!", "Error", JOptionPane.ERROR_MESSAGE);
                     jtfSDT.requestFocus();
                 } else {
+                    hoTen = chuanHoaChuoi(hoTen);
                     KhachHang s = new KhachHang();
                     if (s.capNhapKH(maKH, hoTen, soDT) == true) {
                         init();

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import static main.ThemKHJPanel.chuanHoaChuoi;
 
 /**
  *
@@ -285,6 +286,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Bạn chưa nhập số lượng sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
                     jtfSoLuong.requestFocus();
                 } else {
+                    tenS = chuanHoaChuoi(tenS);
                     Sach s = new Sach();
                     if (s.ThemSach(tenS, giaS, soLuongS) == true) {
                         init();
@@ -331,6 +333,7 @@ public class ThemSachJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Bạn chưa nhập số lượng sách!!!", "Error", JOptionPane.ERROR_MESSAGE);
                 jtfSoLuong.requestFocus();
             } else {
+                tenS = chuanHoaChuoi(tenS);
                 Sach s = new Sach();
                 if (s.capNhapSach(maS, tenS, giaS, soLuongS) == true) {
                     init();

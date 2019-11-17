@@ -86,7 +86,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel2" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="345" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -169,7 +169,7 @@
                 <Column editable="false" title="Ng&#xe0;y m&#x1b0;&#x1ee3;n" type="java.lang.String"/>
                 <Column editable="false" title="Ng&#xe0;y tr&#x1ea3;" type="java.lang.String"/>
                 <Column editable="false" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Double"/>
-                <Column editable="true" title="Ti&#x1ec1;n ph&#x1ea1;t" type="java.lang.Float"/>
+                <Column editable="false" title="Ti&#x1ec1;n ph&#x1ea1;t" type="java.lang.Float"/>
                 <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.String"/>
               </Table>
             </Property>
@@ -200,7 +200,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -258,7 +258,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jbtTimKiem" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="69" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jbtTraSach" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane4" min="-2" pref="168" max="-2" attributes="0"/>

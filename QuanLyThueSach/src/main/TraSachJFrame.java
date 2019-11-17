@@ -150,7 +150,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -179,6 +179,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
             jtbTraSach.getColumnModel().getColumn(3).setPreferredWidth(50);
             jtbTraSach.getColumnModel().getColumn(4).setResizable(false);
             jtbTraSach.getColumnModel().getColumn(4).setPreferredWidth(50);
+            jtbTraSach.getColumnModel().getColumn(5).setResizable(false);
             jtbTraSach.getColumnModel().getColumn(5).setPreferredWidth(50);
             jtbTraSach.getColumnModel().getColumn(6).setResizable(false);
             jtbTraSach.getColumnModel().getColumn(6).setPreferredWidth(40);
@@ -271,7 +272,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtTimKiem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtTraSach)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -294,12 +295,22 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //chỉnh kích thước cột của jtbTraSach
+    private void setSizeColumn(){
+        jtbTraSach.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jtbTraSach.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jtbTraSach.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jtbTraSach.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jtbTraSach.getColumnModel().getColumn(4).setPreferredWidth(100);
+        jtbTraSach.getColumnModel().getColumn(5).setPreferredWidth(100);
+        jtbTraSach.getColumnModel().getColumn(6).setPreferredWidth(50);
+    }
     
     private void loadDaTaDH(){
         try{
@@ -321,6 +332,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 model.addRow(v);
             }
             jtbTraSach.setModel(model);
+            setSizeColumn();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -346,6 +358,7 @@ public class TraSachJFrame extends javax.swing.JFrame {
                 model.addRow(v);
             }
             jtbTraSach.setModel(model);
+            setSizeColumn();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
